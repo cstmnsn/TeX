@@ -9,6 +9,7 @@
 \usepackage[margin=25mm]{geometry}
 \usepackage{enumitem}
 \usepackage{hyperref}
+\usepackage[most]{tcolorbox}
 \usepackage{fontspec}
 \setmainfont{Noto Serif CJK JP}
 \setsansfont{Noto Sans CJK JP}
@@ -22,6 +23,18 @@
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\V}{V}
 \newcommand{\E}{E}
+
+% ---- 用語解説ボックス（itembox風） ----
+\definecolor{termcolor}{RGB}{30,80,130}
+\newtcolorbox{term}[1]{
+  enhanced, breakable,
+  colback=termcolor!5, colframe=termcolor,
+  coltitle=white, fonttitle=\bfseries,
+  title={#1},
+  boxrule=0.6pt, arc=2pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt, boxsep=0pt,
+  before skip=8pt plus 2pt, after skip=8pt plus 2pt,
+}
 
 \title{統計学実践ワークブック エッセンス\\
 \large 統計検定\textsuperscript{\textregistered}準1級 直前対策まとめ}
@@ -38,7 +51,8 @@
 
 事象 $A$ が起きる確率を $P(A)$ と表す。
 
-\noindent\textbf{包除原理}：事象 $A$，$B$ について，$A$ または $B$ が起きる（和事象）確率は一般に次の式で求められる。
+\begin{term}{包除原理}
+事象 $A$，$B$ について，$A$ または $B$ が起きる（和事象）確率は一般に次の式で求められる。
 \[
 P(A \cup B) = P(A) + P(B) - P(A \cap B)
 \]
@@ -46,13 +60,17 @@ P(A \cup B) = P(A) + P(B) - P(A \cap B)
 \[
 P(A \cup B) = P(A) + P(B)
 \]
+\end{term}
 
-\noindent\textbf{事象の独立}：事象 $A$ と $B$ について，次の式が成り立つこと。
+\begin{term}{事象の独立}
+事象 $A$ と $B$ について，次の式が成り立つこと。
 \[
 P(A \cap B) = P(A)P(B)
 \]
+\end{term}
 
-\noindent\textbf{条件付き確率}：$A$ が起きたもとで $B$ が起きる確率を次の式の右辺で定義する。
+\begin{term}{条件付き確率}
+$A$ が起きたもとで $B$ が起きる確率を次の式の右辺で定義する。
 \[
 P(B \mid A) = \frac{P(A \cap B)}{P(A)}
 \]
@@ -66,25 +84,35 @@ P(A \mid B) = \frac{P(B \mid A)P(A)}{P(B)}
 = \frac{P(B\mid A)P(A)}{P(B\mid A)P(A) + P(B\mid A^c)P(A^c)}
 \]
 $A^c$ は $A$ の\textbf{余事象}。例えば，ある病気に罹患している確率を $P(A)$，検査で陽性となる確率を $P(B)$ とすると，$P(A)$ は\textbf{事前確率}，$P(A\mid B)$ は\textbf{事後確率}と呼ばれる。
+\end{term}
 
-\noindent\textbf{条件付き独立}：事象 $A,B,C$ について，$C$ を与えたもとで $A$ と $B$ が条件付き独立であるとは，
+\begin{term}{条件付き独立}
+事象 $A,B,C$ について，$C$ を与えたもとで $A$ と $B$ が条件付き独立であるとは，
 \[
 P(A \cap B \mid C) = P(A\mid C)\,P(B\mid C)
 \]
+\end{term}
 
-\noindent\textbf{確率変数}：事象に対して実数を対応させる関数。離散型・連続型がある。
+\begin{term}{確率変数}
+事象に対して実数を対応させる関数。離散型・連続型がある。
+\end{term}
 
-\noindent\textbf{確率関数}：離散型確率変数 $X$ のとりうるすべての値について，
+\begin{term}{確率関数}
+離散型確率変数 $X$ のとりうるすべての値について，
 \[
 p(x) \ge 0, \qquad \sum_x p(x) = 1
 \]
+\end{term}
 
-\noindent\textbf{確率密度関数}：連続型確率変数 $X$ の定義域全体について，
+\begin{term}{確率密度関数}
+連続型確率変数 $X$ の定義域全体について，
 \[
 f(x) \ge 0, \qquad \int_{-\infty}^{\infty} f(x)\,dx = 1
 \]
+\end{term}
 
-\noindent\textbf{期待値（平均）}：確率変数がとりうる値の起きやすさを加味した平均。離散型：
+\begin{term}{期待値（平均）}
+確率変数がとりうる値の起きやすさを加味した平均。離散型：
 \[
 E[X] = \sum_x x\,p(x), \qquad E[g(X)] = \sum_x g(x)\,p(x)
 \]
@@ -96,8 +124,10 @@ $X,Y$ が離散型でも連続型でも，$a,b,c$ を定数として，
 \[
 E[aX+bY+c] = aE[X]+bE[Y]+c
 \]
+\end{term}
 
-\noindent\textbf{分散}：確率変数がとりうる値の期待値からのばらつき具合の平均。$E[X]=\mu$ として，離散型：
+\begin{term}{分散}
+確率変数がとりうる値の期待値からのばらつき具合の平均。$E[X]=\mu$ として，離散型：
 \[
 V[X] = \sum_x (x-\mu)^2 p(x)
 \]
@@ -110,24 +140,34 @@ $a,b$ を定数として，
 V[aX+b] = a^2 V[X]
 \]
 分散の正の平方根を\textbf{標準偏差}という。
+\end{term}
 
 \section{確率分布と母関数}
 
-\noindent\textbf{累積分布関数}：$F(x) = P(X\le x)$。非減少関数で，分布関数ともいう。$X$ が連続型で $F$ が微分可能，$f$ が連続ならば $F'(x)=f(x)$。
+\begin{term}{累積分布関数}
+$F(x) = P(X\le x)$。非減少関数で，分布関数ともいう。$X$ が連続型で $F$ が微分可能，$f$ が連続ならば $F'(x)=f(x)$。
+\end{term}
 
-\noindent\textbf{同時累積分布関数}：$F(x,y) = P(X\le x, Y\le y)$。
+\begin{term}{同時累積分布関数}
+$F(x,y) = P(X\le x, Y\le y)$。
+\end{term}
 
-\noindent\textbf{同時確率関数}：離散型 $X,Y$ について $p(x,y)=P(X=x,Y=y)$。\textbf{周辺確率関数}：
+\begin{term}{同時確率関数}
+離散型 $X,Y$ について $p(x,y)=P(X=x,Y=y)$。\textbf{周辺確率関数}：
 \[
 p_X(x) = \sum_y p(x,y)
 \]
+\end{term}
 
-\noindent\textbf{条件付き確率関数}：$p_X(x)\ne 0$ のとき，
+\begin{term}{条件付き確率関数}
+$p_X(x)\ne 0$ のとき，
 \[
 p_{Y\mid X}(y\mid x) = \frac{p(x,y)}{p_X(x)}
 \]
+\end{term}
 
-\noindent\textbf{同時確率密度関数}：$F(x,y)$ が2回連続微分可能なとき，
+\begin{term}{同時確率密度関数}
+$F(x,y)$ が2回連続微分可能なとき，
 \[
 F(x,y) = \int_{-\infty}^{x}\int_{-\infty}^{y} f(u,v)\,dv\,du,\qquad
 f(x,y) = \frac{\partial^2}{\partial x\,\partial y}F(x,y)
@@ -136,13 +176,16 @@ $f(x,y)\ge 0$，全体で積分すると1。\textbf{周辺確率密度関数}：
 \[
 f_X(x) = \int_{-\infty}^{\infty} f(x,y)\,dy
 \]
+\end{term}
 
-\noindent\textbf{条件付き確率密度関数}：$f_X(x)\ne 0$ のとき，
+\begin{term}{条件付き確率密度関数}
+$f_X(x)\ne 0$ のとき，
 \[
 f_{Y\mid X}(y\mid x) = \frac{f(x,y)}{f_X(x)}
 \]
+\end{term}
 
-\noindent\textbf{条件付き期待値}：
+\begin{term}{条件付き期待値}
 \[
 E[Y\mid X=x] = \int_{-\infty}^{\infty} y\,f_{Y\mid X}(y\mid x)\,dy
 \]
@@ -150,29 +193,36 @@ E[Y\mid X=x] = \int_{-\infty}^{\infty} y\,f_{Y\mid X}(y\mid x)\,dy
 \[
 E\big[E[Y\mid X]\big] = E[Y]
 \]
+\end{term}
 
-\noindent\textbf{条件付き分散}：
+\begin{term}{条件付き分散}
 \[
 V[Y\mid X=x] = E\big[(Y-E[Y\mid X=x])^2 \,\big|\, X=x\big] = E[Y^2\mid X=x] - \big(E[Y\mid X=x]\big)^2
 \]
+\end{term}
 
-\noindent\textbf{全分散の公式（分散分解の公式）}：
+\begin{term}{全分散の公式（分散分解の公式）}
 \[
 V[Y] = E\big[V(Y\mid X)\big] + V\big[E(Y\mid X)\big]
 \]
 右辺第1項は，$X$を与えたもとでの$Y$の条件付き分散を$X$の分布で平均したもの（$X$を知ってもなお残る変動＝群内変動）。第2項は，$X$の値によって条件付き期待値$E[Y\mid X]$自体が動くことで生じる変動（$X$で説明できる変動＝群間変動）。両者の和が$Y$の分散全体に一致する。
+\end{term}
 
-\noindent\textbf{確率変数の独立}：
+\begin{term}{確率変数の独立}
 \[
 f(x,y) = f_X(x)f_Y(y) \quad(\text{または }p(x,y)=p_X(x)p_Y(y))
 \]
+\end{term}
 
-\noindent\textbf{条件付き独立}：$Z=z$ を与えたとき，
+\begin{term}{条件付き独立}
+$Z=z$ を与えたとき，
 \[
 f(x,y\mid z) = f_{X\mid Z}(x\mid z)\,f_{Y\mid Z}(y\mid z)
 \]
+\end{term}
 
-\noindent\textbf{確率母関数}：離散型 $X$ の確率関数を $p(x)$ とし，1に十分近いすべての $s$ に対して次のべき級数が収束するとき，
+\begin{term}{確率母関数}
+離散型 $X$ の確率関数を $p(x)$ とし，1に十分近いすべての $s$ に対して次のべき級数が収束するとき，
 \[
 G_X(s) = E[s^X] = \sum_x s^x p(x)
 \]
@@ -181,8 +231,10 @@ $s=1$ での微分から，階乗モーメント
 G_X^{(k)}(1) = E[X(X-1)\cdots(X-k+1)]
 \]
 が求まり，これより期待値・分散が得られる。
+\end{term}
 
-\noindent\textbf{モーメント（積率）母関数}：0に十分近いすべての $t$ に対し次の期待値が存在するとき，
+\begin{term}{モーメント（積率）母関数}
+0に十分近いすべての $t$ に対し次の期待値が存在するとき，
 \[
 M_X(t) = E[e^{tX}]
 \]
@@ -190,32 +242,43 @@ $t=0$ での微分から原点まわりのモーメント $M_X^{(k)}(0)=E[X^k]$ 
 \[
 M_{X+Y}(t) = M_X(t)M_Y(t)
 \]
+\end{term}
 
 \section{分布の特性値}
 
-\noindent\textbf{分位点}：$F$ が増加関数のとき，$F(x_{0.25})=0.25$ を満たす $x_{0.25}$ を第1四分位数，$x_{0.5}$（$F(x_{0.5})=0.5$）を中央値，$x_{0.75}$ を第3四分位数，$x_{0.75}-x_{0.25}$ を四分位範囲という。
+\begin{term}{分位点}
+$F$ が増加関数のとき，$F(x_{0.25})=0.25$ を満たす $x_{0.25}$ を第1四分位数，$x_{0.5}$（$F(x_{0.5})=0.5$）を中央値，$x_{0.75}$ を第3四分位数，$x_{0.75}-x_{0.25}$ を四分位範囲という。
+\end{term}
 
-\noindent\textbf{最頻値（モード）}：$f(x)$（または $p(x)$）を最大にする $x$。
+\begin{term}{最頻値（モード）}
+$f(x)$（または $p(x)$）を最大にする $x$。
+\end{term}
 
-\noindent\textbf{変動係数}：非負値の確率変数 $X$ について，
+\begin{term}{変動係数}
+非負値の確率変数 $X$ について，
 \[
 CV = \frac{\sigma}{\mu}
 \]
 標準偏差 $\sigma$ を平均 $\mu$ で割ることで単位が相殺され，無次元量になる。そのため，単位や平均の水準が異なる複数のデータ間でも，相対的なばらつきの大きさを直接比較できる（標準偏差同士の単純比較ではこれができない）。
+\end{term}
 
-\noindent\textbf{歪度}：$E[X]=\mu,\ V[X]=\sigma^2$ として，
+\begin{term}{歪度}
+$E[X]=\mu,\ V[X]=\sigma^2$ として，
 \[
 \gamma_1 = E\!\left[\left(\frac{X-\mu}{\sigma}\right)^{3}\right]
 \]
 右に長い裾なら正，左に長い裾なら負，左右対称なら0。
+\end{term}
 
-\noindent\textbf{尖度}：
+\begin{term}{尖度}
 \[
 \gamma_2 = E\!\left[\left(\frac{X-\mu}{\sigma}\right)^{4}\right]
 \]
 正規分布では3になるので，これとの差で分布形状を比較することがある。
+\end{term}
 
-\noindent\textbf{共分散}：$E[X]=\mu_X,\ E[Y]=\mu_Y$ として，
+\begin{term}{共分散}
+$E[X]=\mu_X,\ E[Y]=\mu_Y$ として，
 \[
 \Cov(X,Y) = E[(X-\mu_X)(Y-\mu_Y)] = E[XY]-\mu_X\mu_Y
 \]
@@ -228,55 +291,72 @@ CV = \frac{\sigma}{\mu}
 V[X\pm Y] = V[X]+V[Y]\pm 2\Cov(X,Y)
 \]
 特に独立なら $V[X\pm Y]=V[X]+V[Y]$。
+\end{term}
 
-\noindent\textbf{相関係数}：
+\begin{term}{相関係数}
 \[
 \rho(X,Y) = \frac{\Cov(X,Y)}{\sqrt{V[X]}\sqrt{V[Y]}} \in [-1,1]
 \]
+\end{term}
 
-\noindent\textbf{偏相関係数}：$Z$ が $X,Y$ の両方に相関があるとき，直接的な相関がなくても擬似相関が生じる。$Z$ の影響を除いた $X,Y$ の偏相関係数は，
+\begin{term}{偏相関係数}
+$Z$ が $X,Y$ の両方に相関があるとき，直接的な相関がなくても擬似相関が生じる。$Z$ の影響を除いた $X,Y$ の偏相関係数は，
 \[
 \rho_{XY\cdot Z} = \frac{\rho_{XY} - \rho_{XZ}\rho_{YZ}}{\sqrt{(1-\rho_{XZ}^2)(1-\rho_{YZ}^2)}}
 \]
+\end{term}
 
-\noindent\textbf{加重平均}：重み $w_1,\dots,w_n$ に対し，
+\begin{term}{加重平均}
+重み $w_1,\dots,w_n$ に対し，
 \[
 \bar{x}_w = \frac{\sum_{i=1}^n w_i x_i}{\sum_{i=1}^n w_i}
 \]
 $w_1=\cdots=w_n=1/n$ のとき算術平均に一致。
+\end{term}
 
-\noindent\textbf{幾何平均}：正のデータについて，
+\begin{term}{幾何平均}
+正のデータについて，
 \[
 \left(\prod_{i=1}^n x_i\right)^{1/n}
 \]
+\end{term}
 
-\noindent\textbf{調和平均}：
+\begin{term}{調和平均}
 \[
 \frac{n}{\sum_{i=1}^n \frac{1}{x_i}}
 \]
+\end{term}
 
-\noindent\textbf{確率変数ベクトル・平均ベクトル}：$\bm{x}=(x_1,\dots,x_p)^T$ について，$E[\bm{x}]=(E[x_1],\dots,E[x_p])^T$。$A$ を $r\times p$ 定数行列，$\bm{b}$ を $r$ 次元定数ベクトルとして，
+\begin{term}{確率変数ベクトル・平均ベクトル}
+$\bm{x}=(x_1,\dots,x_p)^T$ について，$E[\bm{x}]=(E[x_1],\dots,E[x_p])^T$。$A$ を $r\times p$ 定数行列，$\bm{b}$ を $r$ 次元定数ベクトルとして，
 \[
 E[A\bm{x}+\bm{b}] = A E[\bm{x}] + \bm{b}
 \]
+\end{term}
 
-\noindent\textbf{分散共分散行列}：
+\begin{term}{分散共分散行列}
 \[
 \Sigma = \big(\Cov[x_i,x_j]\big)_{i,j=1,\dots,p}
 \]
 半正定値対称行列。
+\end{term}
 
-\noindent\textbf{標本分散共分散行列}：サイズ $n$ の標本に対し，$(i,j)$成分を
+\begin{term}{標本分散共分散行列}
+サイズ $n$ の標本に対し，$(i,j)$成分を
 \[
 s_{ij} = \frac{1}{n-1}\sum_{k=1}^n (x_{ki}-\bar{x}_i)(x_{kj}-\bar{x}_j)
 \]
 とする $p$ 次正方行列。
+\end{term}
 
-\noindent\textbf{相関行列・標本相関行列}：$(i,j)$成分を $\rho[x_i,x_j]$（または標本相関係数）とする半正定値対称行列。
+\begin{term}{相関行列・標本相関行列}
+$(i,j)$成分を $\rho[x_i,x_j]$（または標本相関係数）とする半正定値対称行列。
+\end{term}
 
 \section{変数変換}
 
-\noindent\textbf{$Y=g(X)$ の確率密度関数}：$X,Y$ を連続型，$y=g(x)$ が単調増加または単調減少で逆関数 $x=g^{-1}(y)$ が微分可能なとき，
+\begin{term}{$Y=g(X)$ の確率密度関数}
+$X,Y$ を連続型，$y=g(x)$ が単調増加または単調減少で逆関数 $x=g^{-1}(y)$ が微分可能なとき，
 \[
 f_Y(y) = f_X\big(g^{-1}(y)\big)\left|\frac{d}{dy}g^{-1}(y)\right|
 \]
@@ -284,14 +364,18 @@ f_Y(y) = f_X\big(g^{-1}(y)\big)\left|\frac{d}{dy}g^{-1}(y)\right|
 \[
 f_Y(y) = \lambda(1-y)^{\lambda-1}, \qquad 0<y<1
 \]
+\end{term}
 
-\noindent\textbf{$X+Y$ の確率密度関数}：$X,Y$ が独立な連続型確率変数のとき，$Z=X+Y$ の確率密度関数は畳み込みで与えられる。
+\begin{term}{$X+Y$ の確率密度関数}
+$X,Y$ が独立な連続型確率変数のとき，$Z=X+Y$ の確率密度関数は畳み込みで与えられる。
 \[
 f_Z(z) = \int_{-\infty}^{\infty} f_X(z-t)\,f_Y(t)\,dt
 \]
 （変数変換 $(x,y)\to(z,t)=(x+y,y)$ のヤコビアンは1）
+\end{term}
 
-\noindent\textbf{Box-Cox変換}：非負のデータ $x$ を正規分布に近づける変換。
+\begin{term}{Box-Cox変換}
+非負のデータ $x$ を正規分布に近づける変換。
 \[
 x^{(\lambda)} =
 \begin{cases}
@@ -300,45 +384,53 @@ x^{(\lambda)} =
 \end{cases}
 \]
 $\lambda$ を変化させることで様々な変換が可能で，正規分布に近づくものを選ぶ。
+\end{term}
 
 \section{離散型分布}
 
-\noindent\textbf{離散一様分布}：$\{1,\dots,k\}$ 上で等確率。
+\begin{term}{離散一様分布}
+$\{1,\dots,k\}$ 上で等確率。
 \[
 p(x)=\frac{1}{k}\ (x=1,\dots,k),\qquad
 E[X]=\frac{k+1}{2},\qquad
 V[X]=\frac{k^2-1}{12},\qquad
 G_X(s)=\frac{s(1-s^k)}{k(1-s)}
 \]
+\end{term}
 
-\noindent\textbf{ベルヌーイ分布 $\mathrm{Bin}(1,p)$}：
+\begin{term}{ベルヌーイ分布 $\mathrm{Bin}(1,p)$}
 \[
 p(x)=p^x(1-p)^{1-x}\ (x=0,1),\qquad E[X]=p,\qquad V[X]=p(1-p),\qquad G_X(s)=1-p+ps
 \]
+\end{term}
 
-\noindent\textbf{二項分布 $\mathrm{Bin}(n,p)$}：
+\begin{term}{二項分布 $\mathrm{Bin}(n,p)$}
 \[
 p(x)=\binom{n}{x}p^x(1-p)^{n-x},\qquad
 E[X]=np,\qquad V[X]=np(1-p),\qquad G_X(s)=(1-p+ps)^n
 \]
 再生性：$X_1\sim\mathrm{Bin}(n_1,p),\,X_2\sim\mathrm{Bin}(n_2,p)$ 独立なら $X_1+X_2\sim\mathrm{Bin}(n_1+n_2,p)$。
+\end{term}
 
-\noindent\textbf{超幾何分布 $HG(N,M,n)$}：
+\begin{term}{超幾何分布 $HG(N,M,n)$}
 \[
 p(x)=\frac{\binom{M}{x}\binom{N-M}{n-x}}{\binom{N}{n}},\qquad
 E[X]=\frac{nM}{N},\qquad
 V[X]=n\frac{M}{N}\left(1-\frac{M}{N}\right)\frac{N-n}{N-1}
 \]
 $n,\,M/N$ を一定にして $N\to\infty$ とすると $\mathrm{Bin}(n,M/N)$ に収束する。
+\end{term}
 
-\noindent\textbf{ポアソン分布 $Po(\lambda)$}：
+\begin{term}{ポアソン分布 $Po(\lambda)$}
 \[
 p(x)=\frac{e^{-\lambda}\lambda^x}{x!},\qquad
 E[X]=\lambda,\qquad V[X]=\lambda,\qquad G_X(s)=e^{\lambda(s-1)}
 \]
 再生性あり。二項分布で $np=\lambda,\ n\to\infty$ とすると $Po(\lambda)$ に分布収束（少数の法則）。
+\end{term}
 
-\noindent\textbf{幾何分布 $Geo(p)$}（初成功までの失敗回数 $X$）：
+\begin{term}{幾何分布 $Geo(p)$}
+（初成功までの失敗回数 $X$）：
 \[
 p(x)=(1-p)^x p\ (x=0,1,2,\dots),\qquad
 E[X]=\frac{1-p}{p},\qquad V[X]=\frac{1-p}{p^2},\qquad G_X(s)=\frac{p}{1-(1-p)s}
@@ -351,8 +443,10 @@ p(y)=(1-p)^{y-1}p\ (y=1,2,\dots)
 \[
 P(X\ge m+n \mid X\ge m) = P(X\ge n)
 \]
+\end{term}
 
-\noindent\textbf{負の二項分布 $NB(r,p)$}（$r$回目の成功までの失敗回数）：
+\begin{term}{負の二項分布 $NB(r,p)$}
+（$r$回目の成功までの失敗回数）：
 \[
 p(x)=\binom{x+r-1}{x}p^r(1-p)^x,
 \qquad
@@ -362,8 +456,9 @@ E[X]=\frac{r(1-p)}{p},\qquad V[X]=\frac{r(1-p)}{p^2}
 G_X(s)=\left(\frac{p}{1-(1-p)s}\right)^r
 \]
 $r=1$ で幾何分布に一致。再生性：$X_1\sim NB(r_1,p),\,X_2\sim NB(r_2,p)$独立なら $X_1+X_2\sim NB(r_1+r_2,p)$。
+\end{term}
 
-\noindent\textbf{多項分布 $M(n;p_1,\dots,p_k)$}：
+\begin{term}{多項分布 $M(n;p_1,\dots,p_k)$}
 \[
 P(X_1=x_1,\dots,X_k=x_k) = \frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k},
 \qquad \sum_i x_i=n,\ \sum_i p_i=1
@@ -373,17 +468,19 @@ $k=2$で二項分布に一致。周辺分布 $X_i\sim\mathrm{Bin}(n,p_i)$。$i\n
 \Cov(X_i,X_j) = -np_ip_j,\qquad
 \rho(X_i,X_j) = -\sqrt{\frac{p_ip_j}{(1-p_i)(1-p_j)}}
 \]
+\end{term}
 
 \section{連続型分布と標本分布}
 
-\noindent\textbf{連続一様分布 $U(a,b)$}：
+\begin{term}{連続一様分布 $U(a,b)$}
 \[
 f(x)=\frac{1}{b-a}\ (a<x<b),\qquad
 E[X]=\frac{a+b}{2},\qquad V[X]=\frac{(b-a)^2}{12},\qquad
 M_X(t)=\frac{e^{tb}-e^{ta}}{t(b-a)}
 \]
+\end{term}
 
-\noindent\textbf{正規分布 $N(\mu,\sigma^2)$}：
+\begin{term}{正規分布 $N(\mu,\sigma^2)$}
 \[
 f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right),\qquad
 E[X]=\mu,\qquad V[X]=\sigma^2,\qquad M_X(t)=\exp\!\left(\mu t + \tfrac12\sigma^2t^2\right)
@@ -392,33 +489,40 @@ $\mu=0,\sigma^2=1$ を標準正規分布という。再生性：$X_1\sim N(\mu_1
 \[
 aX_1+bX_2 \sim N(a\mu_1+b\mu_2,\ a^2\sigma_1^2+b^2\sigma_2^2)
 \]
+\end{term}
 
-\noindent\textbf{指数分布 $Exp(\lambda)$}：
+\begin{term}{指数分布 $Exp(\lambda)$}
 \[
 f(x)=\lambda e^{-\lambda x}\ (x>0),\qquad E[X]=\frac1\lambda,\qquad V[X]=\frac1{\lambda^2},\qquad M_X(t)=\frac{\lambda}{\lambda-t}
 \]
 \textbf{無記憶性}：任意の正数 $a,b$ に対し $P(X\ge a+b\mid X\ge a)=P(X\ge b)$。
+\end{term}
 
-\noindent\textbf{ガンマ分布 $Ga(a,b)$}：（$a$：形状母数，$b$：尺度母数）
+\begin{term}{ガンマ分布 $Ga(a,b)$}
+（$a$：形状母数，$b$：尺度母数）
 \[
 f(x)=\frac{1}{\Gamma(a)b^a}x^{a-1}e^{-x/b}\ (x>0),\qquad
 E[X]=ab,\qquad V[X]=ab^2,\qquad M_X(t)=(1-bt)^{-a}
 \]
 $a=1$で $Exp(1/b)$ に一致。再生性：$X_1\sim Ga(a_1,b),X_2\sim Ga(a_2,b)$独立なら $X_1+X_2\sim Ga(a_1+a_2,b)$。
+\end{term}
 
-\noindent\textbf{ベータ分布 $Be(a,b)$}：
+\begin{term}{ベータ分布 $Be(a,b)$}
 \[
 f(x)=\frac{1}{B(a,b)}x^{a-1}(1-x)^{b-1}\ (0<x<1),\qquad
 E[X]=\frac{a}{a+b},\qquad V[X]=\frac{ab}{(a+b)^2(a+b+1)}
 \]
+\end{term}
 
-\noindent\textbf{対数正規分布 $\Lambda(\mu,\sigma^2)$}：$Y\sim N(\mu,\sigma^2)$，$X=e^Y$。
+\begin{term}{対数正規分布 $\Lambda(\mu,\sigma^2)$}
+$Y\sim N(\mu,\sigma^2)$，$X=e^Y$。
 \[
 f(x)=\frac{1}{x\sigma\sqrt{2\pi}}\exp\!\left(-\frac{(\log x-\mu)^2}{2\sigma^2}\right)\ (x>0),\qquad
 E[X]=e^{\mu+\sigma^2/2},\qquad V[X]=(e^{\sigma^2}-1)e^{2\mu+\sigma^2}
 \]
+\end{term}
 
-\noindent\textbf{多変量正規分布 $N(\bm\mu,\Sigma)$}：
+\begin{term}{多変量正規分布 $N(\bm\mu,\Sigma)$}
 \[
 f(\bm x) = \frac{1}{(2\pi)^{k/2}|\Sigma|^{1/2}}\exp\!\left(-\tfrac12(\bm x-\bm\mu)^T\Sigma^{-1}(\bm x-\bm\mu)\right)
 \]
@@ -435,14 +539,18 @@ $X_1=x_1$ を与えたときの $X_2$ の条件付き分布は，
 \[
 X_2\mid X_1=x_1 \ \sim\ N\!\left(\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1),\ \sigma_2^2(1-\rho^2)\right)
 \]
+\end{term}
 
-\noindent\textbf{混合正規分布}：例えば $N(0,1)$ の密度 $\varphi_1$，$N(4,1)$ の密度 $\varphi_2$ として，
+\begin{term}{混合正規分布}
+例えば $N(0,1)$ の密度 $\varphi_1$，$N(4,1)$ の密度 $\varphi_2$ として，
 \[
 f(x) = 0.3\varphi_1(x)+0.7\varphi_2(x)
 \]
 一般に，$\pi_1+\cdots+\pi_k=1\ (\pi_i>0)$，正規密度 $\varphi_1,\dots,\varphi_k$ として $f=\sum_i \pi_i\varphi_i$。
+\end{term}
 
-\noindent\textbf{EMアルゴリズム}（2成分混合正規分布 $f=\pi\varphi_1+(1-\pi)\varphi_2$，$\bm\theta=(\mu_1,\sigma_1^2,\mu_2,\sigma_2^2,\pi)$ の推定）：
+\begin{term}{EMアルゴリズム}
+（2成分混合正規分布 $f=\pi\varphi_1+(1-\pi)\varphi_2$，$\bm\theta=(\mu_1,\sigma_1^2,\mu_2,\sigma_2^2,\pi)$ の推定）：
 \begin{enumerate}[label=\arabic*.]
 \item 初期値 $\bm\theta^{(0)}$ を決める。
 \item \textbf{Eステップ}：観測値 $x_i$ が $N(\mu_1,\sigma_1^2)$ から得られる確率を $\gamma_i$ として，
@@ -453,70 +561,98 @@ f(x) = 0.3\varphi_1(x)+0.7\varphi_2(x)
 \item \textbf{Mステップ}：$\gamma_i^{(k+1)}$ を用いて $\bm\theta^{(k+1)}$（重み付き平均・分散・混合比）を計算。
 \item 2,3を収束するまで繰り返す。
 \end{enumerate}
+\end{term}
 
-\noindent\textbf{カイ2乗分布 $\chi^2(n)$}：$Ga(n/2,2)$。
+\begin{term}{カイ2乗分布 $\chi^2(n)$}
+$Ga(n/2,2)$。
 特徴①：$Z\sim N(0,1)\Rightarrow Z^2\sim\chi^2(1)$。$Z_1,\dots,Z_n$ 独立標準正規なら $\sum Z_i^2\sim\chi^2(n)$。\\
 特徴②：$X\sim\chi^2(m),Y\sim\chi^2(n)$独立なら $X+Y\sim\chi^2(m+n)$。\\
 特徴③：$E[X]=n,\ V[X]=2n$。
+\end{term}
 
-非心カイ2乗分布 $\chi^2(n,\lambda)$：$\lambda=\mu_1^2+\cdots+\mu_n^2>0$ として，$\sum_i(Z_i+\mu_i)^2\sim\chi^2(n,\lambda)$。
+\begin{term}{非心カイ2乗分布 $\chi^2(n,\lambda)$}
+$\lambda=\mu_1^2+\cdots+\mu_n^2>0$ として，$\sum_i(Z_i+\mu_i)^2\sim\chi^2(n,\lambda)$。
 再生性（一般化）：$X_i\sim\chi^2(n_i,\lambda_i)$独立なら $\sum X_i\sim\chi^2\!\left(\sum n_i,\sum\lambda_i\right)$。
+\end{term}
 
-\noindent\textbf{$t$分布 $t(n)$}：$Z\sim N(0,1),\,Y\sim\chi^2(n)$独立として，
+\begin{term}{$t$分布 $t(n)$}
+$Z\sim N(0,1),\,Y\sim\chi^2(n)$独立として，
 \[
 T=\frac{Z}{\sqrt{Y/n}}\ \sim\ t(n)
 \]
 $t(1)$はコーシー分布，$n\to\infty$で標準正規分布に分布収束。$n>1$で $E[X]=0$，$n>2$で $V[X]=n/(n-2)$。
 $Z\sim N(\lambda,1)$のとき，$T$は自由度$n$，非心度$\lambda$の非心$t$分布。
+\end{term}
 
-\noindent\textbf{$F$分布 $F(n_1,n_2)$}：$X_1\sim\chi^2(n_1),X_2\sim\chi^2(n_2)$独立として，
+\begin{term}{$F$分布 $F(n_1,n_2)$}
+$X_1\sim\chi^2(n_1),X_2\sim\chi^2(n_2)$独立として，
 \[
 F=\frac{X_1/n_1}{X_2/n_2}\ \sim\ F(n_1,n_2)
 \]
 $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi^2(n_2)$独立なら，上の$F$は自由度$(n_1,n_2)$，非心度$\lambda$の非心$F$分布。
+\end{term}
 
 \section{極限定理，漸近理論}
 
 確率変数列 $X_1,X_2,\dots$ の収束の強さの順：\\
 \centerline{概収束 $\Rightarrow$ 確率収束 $\Rightarrow$ 分布収束，\quad 平均二乗収束 $\Rightarrow$ 確率収束}
 
-\noindent\textbf{概収束}（例：大数の強法則）：
+\begin{term}{概収束}
+（例：大数の強法則）：
 \[
 P\big(\lim_{n\to\infty} X_n = Y\big) = 1
 \]
+\end{term}
 
-\noindent\textbf{平均二乗収束}（例：大数の弱法則，確率収束の例でもある）：
+\begin{term}{平均二乗収束}
+（例：大数の弱法則，確率収束の例でもある）：
 \[
 \lim_{n\to\infty} E\big[(X_n-Y)^2\big] = 0
 \]
+\end{term}
 
-\noindent\textbf{確率収束}（$X_n\to_p Y$）：任意の $\varepsilon>0$ に対し，
+\begin{term}{確率収束}
+（$X_n\to_p Y$）：任意の $\varepsilon>0$ に対し，
 \[
 \lim_{n\to\infty} P(|X_n-Y|>\varepsilon) = 0
 \]
+\end{term}
 
-\noindent\textbf{分布収束（法則収束）}（$F_n\to_d G$）：$G$のすべての連続点$x$で，
+\begin{term}{分布収束（法則収束）}
+（$F_n\to_d G$）：$G$のすべての連続点$x$で，
 \[
 \lim_{n\to\infty} F_n(x) = G(x)
 \]
+\end{term}
 
-\noindent\textbf{大数の弱法則}：$X_1,\dots,X_n$が平均$\mu$，分散有限の同一分布に独立に従うとき，標本平均は$\mu$に平均二乗収束する。
+\begin{term}{大数の弱法則}
+$X_1,\dots,X_n$が平均$\mu$，分散有限の同一分布に独立に従うとき，標本平均は$\mu$に平均二乗収束する。
+\end{term}
 
-\noindent\textbf{中心極限定理}：$X_1,\dots,X_n$が平均$\mu$，分散$\sigma^2$の同一分布に独立に従うとき，
+\begin{term}{中心極限定理}
+$X_1,\dots,X_n$が平均$\mu$，分散$\sigma^2$の同一分布に独立に従うとき，
 \[
 \frac{\bar X_n - \mu}{\sigma/\sqrt n} \ \to_d\ N(0,1)
 \]
+\end{term}
 
-\noindent\textbf{連続修正}：$X\sim\mathrm{Bin}(n,p)$，$Y\sim N[np,np(1-p)]$として，$P(a\le X\le b)$を$P(a-0.5\le Y\le b+0.5)$で近似する。
+\begin{term}{連続修正}
+$X\sim\mathrm{Bin}(n,p)$，$Y\sim N[np,np(1-p)]$として，$P(a\le X\le b)$を$P(a-0.5\le Y\le b+0.5)$で近似する。
+\end{term}
 
-\noindent\textbf{連続写像定理}：$X_n\to_d X$で$h$が連続なら $h(X_n)\to_d h(X)$。
+\begin{term}{連続写像定理}
+$X_n\to_d X$で$h$が連続なら $h(X_n)\to_d h(X)$。
+\end{term}
 
-\noindent\textbf{スルツキーの補題}：$U_n\to_d U,\ V_n\to_p a$ のとき，
+\begin{term}{スルツキーの補題}
+$U_n\to_d U,\ V_n\to_p a$ のとき，
 \[
 U_n+V_n \to_d U+a,\qquad U_nV_n \to_d aU
 \]
+\end{term}
 
-\noindent\textbf{デルタ法}：$\sqrt n(U_n-\mu)\to_d N(0,\sigma^2)$ のとき，導関数が連続で $h'(\mu)\ne0$ を満たす $h$ に対し，
+\begin{term}{デルタ法}
+$\sqrt n(U_n-\mu)\to_d N(0,\sigma^2)$ のとき，導関数が連続で $h'(\mu)\ne0$ を満たす $h$ に対し，
 \[
 \sqrt n\big(h(U_n)-h(\mu)\big) \ \to_d\ N\big(0,\ h'(\mu)^2\sigma^2\big)
 \]
@@ -525,23 +661,31 @@ $\sqrt n(\bar Y_n-\mu)\to_d N(0,\sigma^2)$ に $h(x)=e^x$ を適用して，
 \[
 \sqrt n\big(e^{\bar Y_n}-e^{\mu}\big) \ \to_d\ N\big(0,\ e^{2\mu}\sigma^2\big)
 \]
+\end{term}
 
 
 \section{統計的推定の基礎}
 
 独立に同一の分布 $f(x;\theta)$ に従う標本 $X_1,\dots,X_n$ の観測値をもとに，パラメータ $\theta$ を推測することを\textbf{統計的推定}という。標本の関数 $h(X_1,\dots,X_n)$を用いてパラメータの値を推定することを\textbf{点推定}，$h$を\textbf{推定量}，観測値を代入した $h(x_1,\dots,x_n)$ を\textbf{推定値}，標本のみの関数を\textbf{統計量}という。
 
-\noindent\textbf{順序統計量}：$X_{(1)} \le X_{(2)} \le \cdots \le X_{(n)}$。
+\begin{term}{順序統計量}
+$X_{(1)} \le X_{(2)} \le \cdots \le X_{(n)}$。
+\end{term}
 
-\noindent\textbf{モーメント}：$E[X^k]$ を原点まわりの$k$次モーメント，$E[(X-\mu)^k]$を平均まわりの$k$次モーメントという。
+\begin{term}{モーメント}
+$E[X^k]$ を原点まわりの$k$次モーメント，$E[(X-\mu)^k]$を平均まわりの$k$次モーメントという。
+\end{term}
 
-\noindent\textbf{モーメント法}：大数の法則に基づく母数推定法。$k$次までのモーメントが $\bm\theta=(\theta_1,\dots,\theta_k)$の関数として表されているとき，$j$次モーメントを $\frac1n\sum X_i^j$ で置き換えて $\theta_1,\dots,\theta_k$ について解く。
+\begin{term}{モーメント法}
+大数の法則に基づく母数推定法。$k$次までのモーメントが $\bm\theta=(\theta_1,\dots,\theta_k)$の関数として表されているとき，$j$次モーメントを $\frac1n\sum X_i^j$ で置き換えて $\theta_1,\dots,\theta_k$ について解く。
 （例）$X\sim\mathrm{Bin}(n,p)$（$E[X]=np,\,V[X]=np(1-p)$）で，標本分散 $S^2$ を用いて，
 \[
 \hat p = 1-\frac{S^2}{\bar X},\qquad \hat n=\frac{\bar X}{\hat p}=\frac{\bar X^2}{\bar X-S^2}
 \]
+\end{term}
 
-\noindent\textbf{最尤法}：観測値 $x_1,\dots,x_n$ に対する\textbf{尤度関数}
+\begin{term}{最尤法}
+観測値 $x_1,\dots,x_n$ に対する\textbf{尤度関数}
 \[
 L(\bm\theta) = \prod_{i=1}^n f(x_i;\bm\theta)
 \]
@@ -553,8 +697,10 @@ L(\bm\theta) = \prod_{i=1}^n f(x_i;\bm\theta)
 \hat\sigma^2 = \frac1n\sum_{i=1}^n (X_i-\bar X)^2
 \]
 これらは$\mu,\sigma^2$の\textbf{一致推定量}（$n\to\infty$で真値に確率収束）である。
+\end{term}
 
-\noindent\textbf{漸近正規性}：適当な正則条件のもとで，$n\to\infty$のとき，
+\begin{term}{漸近正規性}
+適当な正則条件のもとで，$n\to\infty$のとき，
 \[
 \sqrt n(\hat\theta-\theta) \ \to_d\ N\!\left(0,\ \frac{1}{J_1(\theta)}\right)
 \]
@@ -566,32 +712,45 @@ J_n(\theta) = E\!\left[\left(\frac{\partial}{\partial\theta}\log L(\theta)\right
 \[
 J_1(\theta) = -E\!\left[\frac{\partial^2}{\partial\theta^2}\log f(X;\theta)\right]
 \]
+\end{term}
 
-\noindent\textbf{バイアス・バリアンス分解}：
+\begin{term}{バイアス・バリアンス分解}
 \[
 E\big[(\hat\theta-\theta)^2\big] = V[\hat\theta] + \big(E[\hat\theta]-\theta\big)^2
 \]
 （平均2乗誤差 ＝ 分散＋バイアス$^2$）
+\end{term}
 
-\noindent\textbf{不偏推定量}：バイアスが0の推定量。標本分散はバイアスがあるが，不偏分散
+\begin{term}{不偏推定量}
+バイアスが0の推定量。標本分散はバイアスがあるが，不偏分散
 \[
 U^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\bar X)^2
 \]
 は母分散の不偏推定量。
+\end{term}
 
-\noindent\textbf{ジャックナイフ推定量}：バイアスを補正する方法。①標本全体からの推定量 $\hat\theta$。②$X_i$を除いた推定量 $\hat\theta_{(i)}$の平均 $\overline{\hat\theta_{(\cdot)}}$。③新推定量 $= n\hat\theta-(n-1)\overline{\hat\theta_{(\cdot)}}$。
+\begin{term}{ジャックナイフ推定量}
+バイアスを補正する方法。①標本全体からの推定量 $\hat\theta$。②$X_i$を除いた推定量 $\hat\theta_{(i)}$の平均 $\overline{\hat\theta_{(\cdot)}}$。③新推定量 $= n\hat\theta-(n-1)\overline{\hat\theta_{(\cdot)}}$。
+\end{term}
 
-\noindent\textbf{UMVUE}：不偏推定量の中で分散最小のもの（一様最小分散不偏推定量）。
+\begin{term}{UMVUE}
+不偏推定量の中で分散最小のもの（一様最小分散不偏推定量）。
+\end{term}
 
-\noindent\textbf{クラメール・ラオの不等式}：不偏推定量 $\hat\theta$ に対し，
+\begin{term}{クラメール・ラオの不等式}
+不偏推定量 $\hat\theta$ に対し，
 \[
 V[\hat\theta] \ge \frac{1}{n J_1(\theta)}
 \]
+\end{term}
 
-\noindent\textbf{漸近有効推定量}：$n\to\infty$で分散がクラメール・ラオの下限を達成する一致推定量。\\
+\begin{term}{漸近有効推定量}
+$n\to\infty$で分散がクラメール・ラオの下限を達成する一致推定量。\\
 \textbf{有効推定量}：不偏推定量の中でクラメール・ラオの下限を達成するもの（＝UMVUE）。
+\end{term}
 
-\noindent\textbf{十分統計量}：$T(\bm X)=t$ を与えたときの $\bm X=\bm x$ の条件付き確率が $\theta$ に依存しないこと。同値な条件（\textbf{フィッシャー・ネイマンの分解定理}）：
+\begin{term}{十分統計量}
+$T(\bm X)=t$ を与えたときの $\bm X=\bm x$ の条件付き確率が $\theta$ に依存しないこと。同値な条件（\textbf{フィッシャー・ネイマンの分解定理}）：
 \[
 f(\bm x;\theta) = g\big(T(\bm x);\theta\big)\,h(\bm x)
 \]
@@ -600,22 +759,27 @@ f(\bm x;\theta) = g\big(T(\bm x);\theta\big)\,h(\bm x)
 \prod_{i=1}^n \frac{e^{-\lambda}\lambda^{x_i}}{x_i!} = e^{-n\lambda}\lambda^{\sum x_i}\prod_i\frac{1}{x_i!}
 \]
 より $\sum x_i$ が $\lambda$ の十分統計量。
+\end{term}
 
 \section{区間推定}
 
 母平均・母分散の区間推定（母集団分布が正規分布），多項分布の信頼区間は2級内容。
 
-\noindent\textbf{分散の比の区間推定}：2つの正規母集団から求めた不偏分散を $U_A^2,U_B^2$（独立），母分散を$\sigma_A^2,\sigma_B^2$として，信頼度95\%の信頼区間：
+\begin{term}{分散の比の区間推定}
+2つの正規母集団から求めた不偏分散を $U_A^2,U_B^2$（独立），母分散を$\sigma_A^2,\sigma_B^2$として，信頼度95\%の信頼区間：
 \[
 \frac{U_A^2/U_B^2}{F_{0.025}(n_B-1,n_A-1)} \ \le\ \frac{\sigma_A^2}{\sigma_B^2}\ \le\ \frac{U_A^2/U_B^2}{F_{0.975}(n_B-1,n_A-1)}
 \]
 $F_{0.025},F_{0.975}$は自由度$(n_B-1,n_A-1)$のF分布の上側2.5\%点・上側97.5\%点。
+\end{term}
 
-\noindent\textbf{多項分布の差の信頼区間}：$(X_1,\dots,X_k)\sim M(n;p_1,\dots,p_k)$として，$p_1-p_2$の信頼度95\%の信頼区間：
+\begin{term}{多項分布の差の信頼区間}
+$(X_1,\dots,X_k)\sim M(n;p_1,\dots,p_k)$として，$p_1-p_2$の信頼度95\%の信頼区間：
 \[
 (\hat p_1-\hat p_2) \pm 1.96\sqrt{\frac{\hat p_1(1-\hat p_1)+\hat p_2(1-\hat p_2)+2\hat p_1\hat p_2}{n}}
 \]
 ただし $\hat p_1=x_1/n,\ \hat p_2=x_2/n$。
+\end{term}
 
 \section{検定の基礎と検定法の導出}
 
@@ -625,7 +789,8 @@ $F_{0.025},F_{0.975}$は自由度$(n_B-1,n_A-1)$のF分布の上側2.5\%点・�
 \item 検定統計量の実現値が棄却域に落ちれば帰無仮説を棄却し，そうでなければ受容する。
 \end{enumerate}
 
-\noindent\textbf{検出力とサンプルサイズ}：母比率 $p$，有意水準2.5\%の片側検定，帰無仮説 $p=p_0$，対立仮説 $p=p_1\ (p_1>p_0)$。棄却限界値は
+\begin{term}{検出力とサンプルサイズ}
+母比率 $p$，有意水準2.5\%の片側検定，帰無仮説 $p=p_0$，対立仮説 $p=p_1\ (p_1>p_0)$。棄却限界値は
 \[
 p_0 + 1.96\sqrt{\frac{p_0(1-p_0)}{n}}
 \]
@@ -642,16 +807,21 @@ p_1-p_0 = 1.96\sqrt{\frac{p_0(1-p_0)}{n}} + c\sqrt{\frac{p_1(1-p_1)}{n}}
 \frac{\mu_1-\mu_0}{\sigma} = \frac{1.96+c}{\sqrt n}
 \]
 エフェクトサイズが大きいほど，一定の検出力を得るためのサンプルサイズは小さくてすむ。
+\end{term}
 
-\noindent\textbf{生産者危険}：帰無仮説が正しいのに誤って棄却する誤り（\textbf{第一種の過誤}）。不良品率 $p_0$，サンプルサイズ $n$，合格基準値 $c$ として，
+\begin{term}{生産者危険}
+帰無仮説が正しいのに誤って棄却する誤り（\textbf{第一種の過誤}）。不良品率 $p_0$，サンプルサイズ $n$，合格基準値 $c$ として，
 \[
 P(\text{不良品数}>c) = \sum_{x=c+1}^{n}\binom{n}{x}p_0^x(1-p_0)^{n-x}
 \]
+\end{term}
 
-\noindent\textbf{消費者危険}：対立仮説が正しいのに誤って帰無仮説を受容する誤り（\textbf{第二種の過誤}）。不良品率 $p_1$として，
+\begin{term}{消費者危険}
+対立仮説が正しいのに誤って帰無仮説を受容する誤り（\textbf{第二種の過誤}）。不良品率 $p_1$として，
 \[
 P(\text{不良品数}\le c) = \sum_{x=0}^{c}\binom{n}{x}p_1^x(1-p_1)^{n-x}
 \]
+\end{term}
 
 \section{正規分布に関する検定}
 
@@ -661,18 +831,23 @@ P(\text{不良品数}\le c) = \sum_{x=0}^{c}\binom{n}{x}p_1^x(1-p_1)^{n-x}
 
 母比率・母比率の差の検定は2級内容。
 
-\noindent\textbf{ポアソン分布に関する検定}：$\lambda$が大きいとき $Po(\lambda)\approx N(\lambda,\lambda)$。$\lambda=\lambda_0$を帰無仮説として，
+\begin{term}{ポアソン分布に関する検定}
+$\lambda$が大きいとき $Po(\lambda)\approx N(\lambda,\lambda)$。$\lambda=\lambda_0$を帰無仮説として，
 \[
 Z = \frac{X-\lambda_0}{\sqrt{\lambda_0}} \ \sim\ N(0,1) \quad(\text{近似})
 \]
+\end{term}
 
-\noindent\textbf{適合度検定}：$(X_1,\dots,X_k)\sim M(n,p_1,\dots,p_k)$，帰無仮説 $p_i=p_{i0}$。期待度数 $np_{i0}$。
+\begin{term}{適合度検定}
+$(X_1,\dots,X_k)\sim M(n,p_1,\dots,p_k)$，帰無仮説 $p_i=p_{i0}$。期待度数 $np_{i0}$。
 \[
 \chi^2 = \sum_{i=1}^k \frac{(x_i-np_{i0})^2}{np_{i0}} \ \sim\ \chi^2(k-1) \quad(\text{近似})
 \]
 パラメータを$\ell$個推定した場合は自由度 $k-\ell-1$。\textbf{イエーツの補正}：分子を $(|x_i-np_{i0}|-0.5)^2$ に置き換える（第一種の過誤を犯しにくくなる）。
+\end{term}
 
-\noindent\textbf{尤度比検定}：$\bm\theta=(\bm\theta_1,\bm\theta_2)$のうち $\bm\theta_1$ を定数に固定する帰無仮説に対し，
+\begin{term}{尤度比検定}
+$\bm\theta=(\bm\theta_1,\bm\theta_2)$のうち $\bm\theta_1$ を定数に固定する帰無仮説に対し，
 \[
 \lambda = \frac{L(\hat{\bm\theta})}{L(\hat{\bm\theta}\mid H_0)}
 \]
@@ -681,41 +856,57 @@ Z = \frac{X-\lambda_0}{\sqrt{\lambda_0}} \ \sim\ N(0,1) \quad(\text{近似})
 2\log\lambda \ \to_d\ \chi^2(p)
 \]
 （$p$：固定したパラメータの個数）。
+\end{term}
 
 \section{ノンパラメトリック法}
 
 母集団分布を有限個のパラメータで記述するのがパラメトリック法，そうでないのがノンパラメトリック法。対応するパラメトリック検定：1標本の中央値検定↔符号検定・符号付き順位検定，2標本の差の検定（対応なし）↔ウィルコクソンの順位和検定，3群以上の差の検定↔クラスカル・ウォリス検定。
 
-\noindent\textbf{符号検定}：$Z=X-m_0$（1標本）または $Z=X-Y$（対応2標本）。手順：① $Z$の符号を「＋」「－」に分け，0は除く（サイズを改めて$n$）。② ＋の個数 $T$ が帰無仮説下で $\mathrm{Bin}(n,1/2)$ に従うことを用いて$P$値を計算（$n$が大なら$N(n/2,n/4)$で近似）。
+\begin{term}{符号検定}
+$Z=X-m_0$（1標本）または $Z=X-Y$（対応2標本）。手順：① $Z$の符号を「＋」「－」に分け，0は除く（サイズを改めて$n$）。② ＋の個数 $T$ が帰無仮説下で $\mathrm{Bin}(n,1/2)$ に従うことを用いて$P$値を計算（$n$が大なら$N(n/2,n/4)$で近似）。
+\end{term}
 
-\noindent\textbf{符号付き順位検定}：母集団分布の対称性を仮定。① $Z$の符号を分ける。② $|Z|$の小さい順に順位付け。③ ＋の順位合計 $T_+$ を検定統計量とし，$n$が大でタイなしなら
+\begin{term}{符号付き順位検定}
+母集団分布の対称性を仮定。① $Z$の符号を分ける。② $|Z|$の小さい順に順位付け。③ ＋の順位合計 $T_+$ を検定統計量とし，$n$が大でタイなしなら
 \[
 T_+ \ \sim\ N\!\left(\frac{n(n+1)}{4},\ \frac{n(n+1)(2n+1)}{24}\right)\quad(\text{近似})
 \]
+\end{term}
 
-\noindent\textbf{ウィルコクソンの順位和検定}：$X_1,\dots,X_m\sim F$，$Y_1,\dots,Y_n\sim G$独立，$F,G$は分布形が同じと仮定。① 全データを合わせて順位付け。② 一方の群の順位和 $W$ が，$m,n$大でタイなしのとき
+\begin{term}{ウィルコクソンの順位和検定}
+$X_1,\dots,X_m\sim F$，$Y_1,\dots,Y_n\sim G$独立，$F,G$は分布形が同じと仮定。① 全データを合わせて順位付け。② 一方の群の順位和 $W$ が，$m,n$大でタイなしのとき
 \[
 W \ \sim\ N\!\left(\frac{m(m+n+1)}{2},\ \frac{mn(m+n+1)}{12}\right)\quad(\text{近似})
 \]
+\end{term}
 
-\noindent\textbf{並べ替え検定}：標本を固定したもとで統計量 $T$（平均値・中央値など）の分布をつくり，観測値以上に極端な値となる確率（$P$値）を求める。
+\begin{term}{並べ替え検定}
+標本を固定したもとで統計量 $T$（平均値・中央値など）の分布をつくり，観測値以上に極端な値となる確率（$P$値）を求める。
+\end{term}
 
-\noindent\textbf{クラスカル・ウォリス検定}：$k$群，サイズ $n_1,\dots,n_k$（$N=\sum n_i$），順位和 $R_1,\dots,R_k$，順位平均 $\bar R_1,\dots,\bar R_k$。タイなしなら，
+\begin{term}{クラスカル・ウォリス検定}
+$k$群，サイズ $n_1,\dots,n_k$（$N=\sum n_i$），順位和 $R_1,\dots,R_k$，順位平均 $\bar R_1,\dots,\bar R_k$。タイなしなら，
 \[
 H = \frac{12}{N(N+1)}\sum_{i=1}^k n_i\left(\bar R_i-\frac{N+1}{2}\right)^2 \ \to_d\ \chi^2(k-1)
 \]
+\end{term}
 
-\noindent\textbf{順位相関係数}：タイなしのサイズ$n$の2変量順位データ $(x_1,y_1),\dots,(x_n,y_n)$。
+\begin{term}{順位相関係数}
+タイなしのサイズ$n$の2変量順位データ $(x_1,y_1),\dots,(x_n,y_n)$。
+\end{term}
 
-\textbf{スピアマンの順位相関係数}：
+\begin{term}{スピアマンの順位相関係数}
 \[
 r_s = 1 - \frac{6\sum_{i=1}^n (x_i-y_i)^2}{n(n^2-1)}
 \]
+\end{term}
 
-\textbf{ケンドールの順位相関係数}：正の組数 $P$，負の組数 $N$（$(x_i-x_j)(y_i-y_j)$の符号）として，
+\begin{term}{ケンドールの順位相関係数}
+正の組数 $P$，負の組数 $N$（$(x_i-x_j)(y_i-y_j)$の符号）として，
 \[
 \tau = \frac{P-N}{n(n-1)/2}
 \]
+\end{term}
 
 
 \section{マルコフ連鎖}
@@ -726,21 +917,28 @@ P(X_{n+1}=j\mid X_n=i,X_{n-1},\dots,X_0) = P(X_{n+1}=j\mid X_n=i)
 \]
 を満たすとき\textbf{マルコフ連鎖}という。$\{1,\dots,N\}$を\textbf{状態空間}という。条件付き確率が$n$によらないとき\textbf{斉時的}という。
 
-\noindent\textbf{状態確率ベクトル}：$\bm\pi_n=(p_n(1),\dots,p_n(N))$。$\bm\pi_0$を\textbf{初期分布}という。\\
+\begin{term}{状態確率ベクトル}
+$\bm\pi_n=(p_n(1),\dots,p_n(N))$。$\bm\pi_0$を\textbf{初期分布}という。\\
 \textbf{推移確率行列}：$\bm\pi_{n+1}=\bm\pi_n Q$ を満たす $N$次正方行列 $Q$。\\
 \textbf{定常分布}：$\bm\pi=\bm\pi Q$ を満たす $\bm\pi$。ある条件下でただ1つ存在する。
+\end{term}
 
-\noindent\textbf{パラメータの推定}：観測データ $X_0=x_0,\dots,X_n=x_n$ を用いた最尤推定は，
+\begin{term}{パラメータの推定}
+観測データ $X_0=x_0,\dots,X_n=x_n$ を用いた最尤推定は，
 \[
 P(X_0=x_0,\dots,X_n=x_n) = P(X_0=x_0)\prod_{t=1}^{n} P(X_t=x_t\mid X_{t-1}=x_{t-1})
 \]
 を尤度関数として行う。
+\end{term}
 
 \section{確率過程の基礎}
 
-\textbf{確率過程}：$X_1,X_2,\dots$ を離散時間の確率過程，$t\ge 0$ 実数全体をとる $X=(X_t)$ を連続時間の確率過程という。
+\begin{term}{確率過程}
+$X_1,X_2,\dots$ を離散時間の確率過程，$t\ge 0$ 実数全体をとる $X=(X_t)$ を連続時間の確率過程という。
+\end{term}
 
-\noindent\textbf{ブラウン運動}：$B=(B_t)$ が次を満たす。
+\begin{term}{ブラウン運動}
+$B=(B_t)$ が次を満たす。
 \begin{enumerate}[label=\arabic*.]
 \item $B_0=0$，パスは連続。
 \item \textbf{独立増分性}：任意の $0=t_0<t_1<\cdots<t_n$ に対し，$B_{t_1}-B_{t_0},\dots,B_{t_n}-B_{t_{n-1}}$ は互いに独立。
@@ -750,16 +948,20 @@ P(X_0=x_0,\dots,X_n=x_n) = P(X_0=x_0)\prod_{t=1}^{n} P(X_t=x_t\mid X_{t-1}=x_{t-
 \[
 \hat\mu = \frac{\bar Z}{\Delta},\qquad \hat\sigma^2 = \frac{1}{\Delta}\cdot\frac1n\sum_k (Z_k-\bar Z)^2
 \]
+\end{term}
 
-\noindent\textbf{ポアソン過程}：強度 $\lambda$ のポアソン過程 $N=(N_t)$ は次を満たす。
+\begin{term}{ポアソン過程}
+強度 $\lambda$ のポアソン過程 $N=(N_t)$ は次を満たす。
 \begin{enumerate}[label=\arabic*.]
 \item $N_0=0$。
 \item 独立増分性。
 \item 定常増分性：$N_t-N_s\sim Po(\lambda(t-s))$（$t>s\ge0$）。
 \end{enumerate}
 イベント発生時刻を $T_1,\dots,T_n$，時間間隔 $W_k=T_k-T_{k-1}\sim Exp(\lambda)$ 独立。$\lambda$ の推定量：$n/T_n$，または時間間隔 $\Delta$ ごとの観測回数を用いて $N_{n\Delta}/(n\Delta)$。いずれも（イベント総数）÷（観測期間）。
+\end{term}
 
-\noindent\textbf{複合ポアソン過程}：$N=(N_t)$がポアソン過程，$(U_k)$が独立同分布で$N$と独立として，
+\begin{term}{複合ポアソン過程}
+$N=(N_t)$がポアソン過程，$(U_k)$が独立同分布で$N$と独立として，
 \[
 X_t = \sum_{k=1}^{N_t} U_k
 \]
@@ -767,6 +969,7 @@ $E[N_t]=\lambda t,\ E[U_k]=\mu,\ V[U_k]=\sigma^2$のとき，
 \[
 E[X_t]=\lambda\mu t,\qquad V[X_t]=\lambda t(\mu^2+\sigma^2)
 \]
+\end{term}
 
 \section{重回帰分析}
 
@@ -775,7 +978,8 @@ $\bm y=(y_1,\dots,y_n)^T$，説明変数行列 $X=(x_{ij})$，$\bm\beta=(\beta_0
 \bm y = X\bm\beta + \bm\varepsilon
 \]
 
-\noindent\textbf{最小2乗法}：$X^TX$ が正則なら，誤差平方和 $\bm\varepsilon^T\bm\varepsilon$ を最小にする $\bm\beta$（\textbf{最小2乗推定量}）は，
+\begin{term}{最小2乗法}
+$X^TX$ が正則なら，誤差平方和 $\bm\varepsilon^T\bm\varepsilon$ を最小にする $\bm\beta$（\textbf{最小2乗推定量}）は，
 \[
 \hat{\bm\beta} = (X^TX)^{-1}X^T\bm y
 \]
@@ -784,19 +988,23 @@ $E[\bm\varepsilon]=\bm 0$ なら不偏。$V[\bm\varepsilon]=\sigma^2 I$ なら $
 \hat{\bm y} = X\hat{\bm\beta},\qquad \bm e = \bm y - \hat{\bm y}
 \]
 残差の自由度は $n-d-1$，$\bm e^T\bm e/(n-d-1)$ は $\sigma^2$ の不偏推定量。
+\end{term}
 
-\noindent\textbf{決定係数}：
+\begin{term}{決定係数}
 \[
 R^2 = \frac{\sum_i (\hat y_i-\bar y)^2}{\sum_i (y_i-\bar y)^2} = 1-\frac{\bm e^T\bm e}{\sum_i(y_i-\bar y)^2} \in [0,1]
 \]
 説明変数を増やすと必ず大きくなる欠点がある。
+\end{term}
 
-\noindent\textbf{自由度調整済み決定係数}：
+\begin{term}{自由度調整済み決定係数}
 \[
 \bar R^2 = 1-\frac{n-1}{n-d-1}(1-R^2)
 \]
+\end{term}
 
-\noindent\textbf{回帰係数の推定と検定}：$\bm\varepsilon\sim N(\bm 0,\sigma^2 I)$ なら $\hat{\bm\beta}\sim N(\bm\beta,\sigma^2(X^TX)^{-1})$。$\beta_i=0$ の検定：
+\begin{term}{回帰係数の推定と検定}
+$\bm\varepsilon\sim N(\bm 0,\sigma^2 I)$ なら $\hat{\bm\beta}\sim N(\bm\beta,\sigma^2(X^TX)^{-1})$。$\beta_i=0$ の検定：
 \[
 \frac{\hat\beta_i}{\mathrm{se}(\hat\beta_i)} \ \sim\ t(n-d-1)
 \]
@@ -804,39 +1012,53 @@ $\beta_1=\cdots=\beta_d=0$ の検定：
 \[
 \frac{R^2/d}{(1-R^2)/(n-d-1)} \ \sim\ F(d,\,n-d-1)
 \]
+\end{term}
 
-\noindent\textbf{一般化最小2乗法}：誤差項が不均一分散・相関ありの場合，適切な変換を組み込んだ推定量がBLUE。
+\begin{term}{一般化最小2乗法}
+誤差項が不均一分散・相関ありの場合，適切な変換を組み込んだ推定量がBLUE。
+\end{term}
 
-\noindent\textbf{L$_2$正則化（リッジ回帰）}：
+\begin{term}{L$_2$正則化（リッジ回帰）}
 \[
 \sum_{i=1}^n\Big(y_i-\beta_0-\sum_{j=1}^d \beta_jx_{ij}\Big)^2 + \lambda\sum_{j=1}^d\beta_j^2 \ \to\ \min
 \]
 $\lambda=0$で通常の最小2乗法。$\lambda$を大きくすると回帰係数は0に近づく。
+\end{term}
 
-\noindent\textbf{L$_1$正則化（Lasso回帰）}：
+\begin{term}{L$_1$正則化（Lasso回帰）}
 \[
 \sum_{i=1}^n\Big(y_i-\beta_0-\sum_{j=1}^d \beta_jx_{ij}\Big)^2 + \lambda\sum_{j=1}^d|\beta_j| \ \to\ \min
 \]
 スパース性（回帰係数が真に0になりやすい）があり，推定とモデル選択を同時に行える。
+\end{term}
 
-\noindent\textbf{Elastic Net}：L$_1$とL$_2$を混ぜたもの。変数選択と係数の縮小を同時に行う。\\
+\begin{term}{Elastic Net}
+L$_1$とL$_2$を混ぜたもの。変数選択と係数の縮小を同時に行う。\\
 \textbf{Fused lasso}：隣接する回帰係数の差にL$_1$罰則を課す（時間的に滑らかな変化を表現）。
+\end{term}
 
 \section{回帰診断法}
 
-\noindent\textbf{残差プロット}：縦軸に残差，横軸に予測値。誤差項の独立性・分散一定性の仮定が崩れていないか確認。\\
+\begin{term}{残差プロット}
+縦軸に残差，横軸に予測値。誤差項の独立性・分散一定性の仮定が崩れていないか確認。\\
 \textbf{正規Q-Qプロット}：縦軸に標準化残差の経験分位点，横軸に標準正規分布の理論分位点。正規性が成り立てば傾き1の直線に沿う。
+\end{term}
 
-\noindent\textbf{てこ比}：予測値ベクトル $\hat{\bm y}=X(X^TX)^{-1}X^T\bm y$。行列 $H=X(X^TX)^{-1}X^T$ の対角成分 $h_{ii}$。
+\begin{term}{てこ比}
+予測値ベクトル $\hat{\bm y}=X(X^TX)^{-1}X^T\bm y$。行列 $H=X(X^TX)^{-1}X^T$ の対角成分 $h_{ii}$。
+\end{term}
 
-\noindent\textbf{Cookの距離}：$i$番目のデータを除いたときの予測値の変化を用いる。$\hat y_j,\hat y_{j(-i)}$（$i$番目を除いたときの予測値）として，
+\begin{term}{Cookの距離}
+$i$番目のデータを除いたときの予測値の変化を用いる。$\hat y_j,\hat y_{j(-i)}$（$i$番目を除いたときの予測値）として，
 \[
 D_i = \frac{\sum_{j=1}^n\big(\hat y_j - \hat y_{j(-i)}\big)^2}{(d+1)\hat\sigma^2}
 \]
+\end{term}
 
 \section{質的回帰}
 
-\noindent\textbf{一般化線形モデル}：1対1の関数 $g$（\textbf{リンク関数}）を用いて，
+\begin{term}{一般化線形モデル}
+1対1の関数 $g$（\textbf{リンク関数}）を用いて，
 \[
 E[Y\mid X_1,\dots,X_k] = g^{-1}\big(\beta_0+\beta_1X_1+\cdots+\beta_kX_k\big)
 \]
@@ -845,8 +1067,10 @@ E[Y\mid X_1,\dots,X_k] = g^{-1}\big(\beta_0+\beta_1X_1+\cdots+\beta_kX_k\big)
 g\big(E[Y\mid X_1,\dots,X_k]\big) = \beta_0+\beta_1X_1+\cdots+\beta_kX_k
 \]
 $Y$の従う確率分布を\textbf{誤差構造}という。代表例：正規分布（恒等リンク，線形回帰），二項分布（ロジットリンク，ロジスティック回帰），ポアソン分布（対数リンク，ポアソン回帰）。
+\end{term}
 
-\noindent\textbf{ロジスティック回帰モデル}：$\bm\beta^T\bm x=\beta_0+\beta_1x_1+\cdots+\beta_kx_k$として，
+\begin{term}{ロジスティック回帰モデル}
+$\bm\beta^T\bm x=\beta_0+\beta_1x_1+\cdots+\beta_kx_k$として，
 \[
 \pi_i = P(y_i=1\mid \bm x_i) = \frac{\exp(\bm\beta^T\bm x_i)}{1+\exp(\bm\beta^T\bm x_i)}
 \]
@@ -856,14 +1080,17 @@ $Y$の従う確率分布を\textbf{誤差構造}という。代表例：正規�
 \]
 とも表せる（左辺は対数オッズ）。$x_{ij}$ を1増やすと対数オッズは $\beta_j$ 増加，オッズは $\exp(\beta_j)$ 倍。
 \textbf{ロジスティック変換}（ロジット変換の逆変換）：$x\mapsto \exp(x)/(1+\exp(x))$。
+\end{term}
 
-対数尤度関数：
+\begin{term}{対数尤度関数}
 \[
 \ell(\bm\beta) = \sum_{i=1}^n\Big[y_i\log\pi_i + (1-y_i)\log(1-\pi_i)\Big]
 = \sum_{i=1}^n\Big[y_i \bm\beta^T\bm x_i - \log\big(1+\exp(\bm\beta^T\bm x_i)\big)\Big]
 \]
+\end{term}
 
-\noindent\textbf{プロビット回帰モデル}：標準正規分布の累積分布関数 $\Phi$ を用いて，
+\begin{term}{プロビット回帰モデル}
+標準正規分布の累積分布関数 $\Phi$ を用いて，
 \[
 p_i = \Phi(\bm\beta^T\bm x_i), \qquad\text{すなわち}\qquad \Phi^{-1}(p_i) = \bm\beta^T\bm x_i
 \]
@@ -871,14 +1098,17 @@ p_i = \Phi(\bm\beta^T\bm x_i), \qquad\text{すなわち}\qquad \Phi^{-1}(p_i) = 
 \[
 \frac{\partial p_i}{\partial x_{ij}} = \varphi(\bm\beta^T\bm x_i)\,\beta_j
 \]
+\end{term}
 
-\noindent\textbf{ポアソン回帰モデル}：平均 $\pi$ とカウントデータについて，
+\begin{term}{ポアソン回帰モデル}
+平均 $\pi$ とカウントデータについて，
 \[
 \log \pi = \beta_0+\beta_1x_1+\cdots+\beta_kx_k, \qquad \pi = \exp(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)
 \]
 $x_i$を1増やすと $\pi$ は $\exp(\beta_i)$ 倍。
+\end{term}
 
-\noindent\textbf{指数型分布族}：
+\begin{term}{指数型分布族}
 \[
 f(y;\theta,\phi) = \exp\!\left\{\frac{y\theta-b(\theta)}{a(\phi)}+c(y,\phi)\right\}
 \]
@@ -886,10 +1116,12 @@ $\theta$：正準母数，$\phi$：散らばり母数。正規分布 $N(\mu,\sig
 \[
 E[Y] = b'(\theta),\qquad V[Y] = a(\phi)\,b''(\theta)
 \]
+\end{term}
 
 \section{回帰分析その他}
 
-\noindent\textbf{トービットモデル}：潜在変数 $Y^*=\beta_0+\beta_1X_1+\beta_2X_2+\varepsilon$ を考え，$Y^*\le0$なら$Y=0$，$Y^*>0$なら$Y=Y^*$。$\varepsilon_i\sim N(0,\sigma^2)$独立とすると，$y_i^*\mid x_i \sim N(\beta_0+\beta_1x_{i1}+\beta_2x_{i2},\sigma^2)$。$y_i>0$ の観測に対する密度：
+\begin{term}{トービットモデル}
+潜在変数 $Y^*=\beta_0+\beta_1X_1+\beta_2X_2+\varepsilon$ を考え，$Y^*\le0$なら$Y=0$，$Y^*>0$なら$Y=Y^*$。$\varepsilon_i\sim N(0,\sigma^2)$独立とすると，$y_i^*\mid x_i \sim N(\beta_0+\beta_1x_{i1}+\beta_2x_{i2},\sigma^2)$。$y_i>0$ の観測に対する密度：
 \[
 f(y_i\mid x_i) = \frac1\sigma\varphi\!\left(\frac{y_i-\bm\beta^T\bm x_i}{\sigma}\right)
 \]
@@ -902,8 +1134,10 @@ P(y_i^*\le0) = \Phi\!\left(-\frac{\bm\beta^T\bm x_i}{\sigma}\right)
 L(\bm\beta,\sigma) = \prod_{y_i>0} \frac1\sigma\varphi\!\left(\frac{y_i-\bm\beta^T\bm x_i}{\sigma}\right)
 \prod_{y_i=0} \Phi\!\left(-\frac{\bm\beta^T\bm x_i}{\sigma}\right)
 \]
+\end{term}
 
-\noindent\textbf{生存時間}：基準時点からイベント発生までの時間。\\
+\begin{term}{生存時間}
+基準時点からイベント発生までの時間。\\
 \textbf{生存関数}：$S(t)=P(T\ge t)=1-F(t)$，$S'(t)=-f(t)$。\\
 \textbf{ハザード関数}：
 \[
@@ -916,33 +1150,43 @@ H(t) = \int_0^t h(u)\,du = -\log S(t)
 \[
 f(t) = h(t)\,S(t) = h(t)\exp\big(-H(t)\big)
 \]
+\end{term}
 
-\noindent\textbf{カプラン・マイヤー法}：時点$t$までのイベント発生時点を用いて，生存率を
+\begin{term}{カプラン・マイヤー法}
+時点$t$までのイベント発生時点を用いて，生存率を
 \[
 \hat S(t) = \prod_{t_i\le t}\left(1-\frac{d_i}{n_i}\right)
 \]
 （$d_i$：時点$t_i$での発生数，$n_i$：直前のリスク集合数）で推定し，階段状にプロットしたものを\textbf{カプラン・マイヤー曲線}という。
+\end{term}
 
-\noindent\textbf{Cox比例ハザードモデル}：共変量 $x_1,\dots,x_n$ として，
+\begin{term}{Cox比例ハザードモデル}
+共変量 $x_1,\dots,x_n$ として，
 \[
 h(t\mid \bm x) = h_0(t)\exp(\bm\beta^T\bm x)
 \]
 $h_0(t)$は\textbf{基準ハザード}（分布形を仮定しない）。\textbf{比例ハザード性}（ハザード比が時間で不変）の確認が必要。
+\end{term}
 
-\noindent\textbf{ニューラルネットワークモデル}：入力 $x_1,\dots,x_d$，重み $w_1,\dots,w_d$，バイアス $b$，活性化関数 $f$ として，1ユニットの出力は
+\begin{term}{ニューラルネットワークモデル}
+入力 $x_1,\dots,x_d$，重み $w_1,\dots,w_d$，バイアス $b$，活性化関数 $f$ として，1ユニットの出力は
 \[
 f(\bm w^T\bm x+b) = f(b+w_1x_1+\cdots+w_dx_d)
 \]
 これを層状に並べたものがニューラルネットワークモデル。
+\end{term}
 
 
 \section{分散分析と実験計画法}
 
 観測データに影響を与える可能性のあるもののうち実験で取り上げるものを\textbf{因子}，因子がとりうる条件を\textbf{水準}，複数因子の水準の組合せを\textbf{処理}という。
 
-\noindent\textbf{フィッシャーの3原則}：①無作為化（処理をランダムに割当），②反復（同じ処理を複数回），③局所管理（ブロック内で均一な条件）。①②のみ満たすものを\textbf{完全無作為化法}，①〜③すべて満たすものを\textbf{乱塊法}という。
+\begin{term}{フィッシャーの3原則}
+①無作為化（処理をランダムに割当），②反復（同じ処理を複数回），③局所管理（ブロック内で均一な条件）。①②のみ満たすものを\textbf{完全無作為化法}，①〜③すべて満たすものを\textbf{乱塊法}という。
+\end{term}
 
-\noindent\textbf{1元配置完全無作為化法}：水準 $A_1,\dots,A_a$ の母平均 $\mu_1,\dots,\mu_a$，効果 $\alpha_1,\dots,\alpha_a$として，
+\begin{term}{1元配置完全無作為化法}
+水準 $A_1,\dots,A_a$ の母平均 $\mu_1,\dots,\mu_a$，効果 $\alpha_1,\dots,\alpha_a$として，
 \[
 y_{ij} = \mu + \alpha_i + \varepsilon_{ij}, \qquad \varepsilon_{ij}\sim N(0,\sigma^2)\ \text{独立}
 \]
@@ -964,29 +1208,39 @@ y_{ij} = \mu + \alpha_i + \varepsilon_{ij}, \qquad \varepsilon_{ij}\sim N(0,\sig
 \[
 \bar y_{i\cdot} \pm t_{0.025}(n-a)\sqrt{\frac{\hat\sigma^2}{n_i}}
 \]
+\end{term}
 
-\noindent\textbf{1元配置乱塊法}：ブロック効果 $\gamma_j$ として，
+\begin{term}{1元配置乱塊法}
+ブロック効果 $\gamma_j$ として，
 \[
 y_{ij} = \mu+\alpha_i+\gamma_j+\varepsilon_{ij}, \qquad \sum_i\alpha_i=0,\ \sum_j\gamma_j=0
 \]
 平方和：$S_T=S_A+S_R+S_E$。因子の効果は $\dfrac{S_A/(a-1)}{S_E/((a-1)(r-1))}\sim F[a-1,(a-1)(r-1)]$，ブロックの効果は $\dfrac{S_R/(r-1)}{S_E/((a-1)(r-1))}\sim F[r-1,(a-1)(r-1)]$ で検定。
+\end{term}
 
-\noindent\textbf{2元配置完全無作為化法}：因子$A,B$，水準効果$\alpha_i,\beta_j$，交互作用 $(\alpha\beta)_{ij}$ として，
+\begin{term}{2元配置完全無作為化法}
+因子$A,B$，水準効果$\alpha_i,\beta_j$，交互作用 $(\alpha\beta)_{ij}$ として，
 \[
 y_{ijk} = \mu+\alpha_i+\beta_j+(\alpha\beta)_{ij}+\varepsilon_{ijk}
 \]
 ただし $\sum_i\alpha_i=0,\sum_j\beta_j=0,\sum_i(\alpha\beta)_{ij}=\sum_j(\alpha\beta)_{ij}=0$。平方和：$S_T=S_A+S_B+S_{A\times B}+S_E$。
 $A$の主効果：$\dfrac{S_A/(a-1)}{S_E/(ab(n-1))}\sim F[a-1,ab(n-1)]$，$B$の主効果，交互作用も同様に検定。
+\end{term}
 
-\noindent\textbf{2元配置乱塊法}：ブロック効果 $\gamma_k$ を追加した構造モデル。平方和は $S_T=S_A+S_B+S_R+S_{A\times B}+S_E$ に分解。
+\begin{term}{2元配置乱塊法}
+ブロック効果 $\gamma_k$ を追加した構造モデル。平方和は $S_T=S_A+S_B+S_R+S_{A\times B}+S_E$ に分解。
+\end{term}
 
-\noindent\textbf{直交表}：一部の交互作用のみ取り上げて実験回数を減らす\textbf{一部実施要因計画}に用いる。例：$L_8(2^7)$（2水準，7列，8実験）。列の割り付けにより交互作用効果が他の主効果と区別できなくなることを\textbf{交絡}という。
+\begin{term}{直交表}
+一部の交互作用のみ取り上げて実験回数を減らす\textbf{一部実施要因計画}に用いる。例：$L_8(2^7)$（2水準，7列，8実験）。列の割り付けにより交互作用効果が他の主効果と区別できなくなることを\textbf{交絡}という。
+\end{term}
 
 \section{標本調査法}
 
 調査単位と抽出単位が一致し，各標本の抽出確率が等しい抽出法を\textbf{単純無作為抽出}という。以下，非復元抽出を考える。
 
-\noindent\textbf{標本平均の期待値と分散}：大きさ$N$の母集団（母平均$\mu$，母分散$\sigma^2$）から大きさ$n$を非復元単純無作為抽出：
+\begin{term}{標本平均の期待値と分散}
+大きさ$N$の母集団（母平均$\mu$，母分散$\sigma^2$）から大きさ$n$を非復元単純無作為抽出：
 \[
 E[\bar X] = \mu, \qquad V[\bar X] = \frac{\sigma^2}{n}\cdot\frac{N-n}{N-1}
 \]
@@ -994,28 +1248,37 @@ $(N-n)/(N-1)$を\textbf{有限修正項}という。$V(\bar X)\le c$ を解く�
 \[
 n \ge \frac{N\sigma^2}{(N-1)c+\sigma^2}
 \]
+\end{term}
 
-\noindent\textbf{層化抽出法}：基準を決めていくつかの層に分けた後，各層から無作為抽出する方法。層内均質・層間異質に層化すると精度が上がる。
+\begin{term}{層化抽出法}
+基準を決めていくつかの層に分けた後，各層から無作為抽出する方法。層内均質・層間異質に層化すると精度が上がる。
+\end{term}
 
-\noindent\textbf{標本配分法}：層の大きさ $N_1,\dots,N_k$（$\sum N_j=N$），標本の大きさ $n_1,\dots,n_k$（$\sum n_j=n$）。
+\begin{term}{標本配分法}
+層の大きさ $N_1,\dots,N_k$（$\sum N_j=N$），標本の大きさ $n_1,\dots,n_k$（$\sum n_j=n$）。
+\end{term}
 
-\textbf{比例配分法}：
+\begin{term}{比例配分法}
 \[
 n_j = n\cdot\frac{N_j}{N}
 \]
 （単純無作為抽出の場合の標本平均の分散を超えない。）
+\end{term}
 
-\textbf{等配分法}：
+\begin{term}{等配分法}
 \[
 n_j = \frac{n}{k}
 \]
+\end{term}
 
-\textbf{ネイマン配分法}（分散最小）：$j$番目の層の母標準偏差 $\sigma_j$ として，
+\begin{term}{ネイマン配分法}
+（分散最小）：$j$番目の層の母標準偏差 $\sigma_j$ として，
 \[
 n_j = n\cdot\frac{N_j\sigma_j/\sqrt{(N_j-1)}}{\sum_{l=1}^k N_l\sigma_l/\sqrt{(N_l-1)}}
 \ \approx\
 n\cdot\frac{N_j\sigma_j}{\sum_{l=1}^k N_l\sigma_l}
 \]
+\end{term}
 
 \section{主成分分析}
 
@@ -1027,19 +1290,24 @@ y_i = \bm w_i^T\bm x = w_{1i}x_1+\cdots+w_{pi}x_p
 \]
 $V[y_i]=\lambda_i$，$\sum_i V[x_i] = \sum_i\lambda_i$。相関行列に対する主成分分析でも同様に定義し，$\sum_i\lambda_i=p$。
 
-\noindent\textbf{寄与率}：$\lambda_i/\sum_j\lambda_j$。\textbf{累積寄与率}：大きい方から合計。\\
+\begin{term}{寄与率}
+$\lambda_i/\sum_j\lambda_j$。\textbf{累積寄与率}：大きい方から合計。\\
 \textbf{主成分得点}：主成分軸上でのデータの値。\\
 \textbf{主成分負荷量}（分散共分散行列版，$y_i$と$x_2$の相関係数）：
 \[
 r(y_i,x_2) = \frac{w_{2i}\sqrt{\lambda_i}}{\sqrt{V[x_2]}}
 \]
 相関行列版では分母は1。
+\end{term}
 
-\noindent\textbf{自己符号化器}：入力 $\bm x$ を低次元表現に符号化 $\bm y=f(W^T\bm x+\bm b)$ し，復号化器で $\hat{\bm x}=g(W'^T\bm y+\bm b')$ のように元の入力に近いデータを再構築するニューラルネットワーク。
+\begin{term}{自己符号化器}
+入力 $\bm x$ を低次元表現に符号化 $\bm y=f(W^T\bm x+\bm b)$ し，復号化器で $\hat{\bm x}=g(W'^T\bm y+\bm b')$ のように元の入力に近いデータを再構築するニューラルネットワーク。
+\end{term}
 
 \section{判別分析}
 
-\noindent\textbf{フィッシャーの線形判別分析}：2変数 $(x_1,x_2)$，$Y=w_1x_1+w_2x_2=\bm w^T\bm x$。群間変動 $\bm w^TS_B\bm w$ を群内変動 $\bm w^TS_W\bm w$ でわった比を最大化：
+\begin{term}{フィッシャーの線形判別分析}
+2変数 $(x_1,x_2)$，$Y=w_1x_1+w_2x_2=\bm w^T\bm x$。群間変動 $\bm w^TS_B\bm w$ を群内変動 $\bm w^TS_W\bm w$ でわった比を最大化：
 \[
 S_B = (\bar{\bm x}^{(1)}-\bar{\bm x}^{(2)})(\bar{\bm x}^{(1)}-\bar{\bm x}^{(2)})^T
 \]
@@ -1052,8 +1320,10 @@ S_B = (\bar{\bm x}^{(1)}-\bar{\bm x}^{(2)})(\bar{\bm x}^{(1)}-\bar{\bm x}^{(2)})
 f(\bm x) = \bm w^T\left(\bm x - \frac{\bar{\bm x}^{(1)}+\bar{\bm x}^{(2)}}{2}\right)
 \]
 の符号で判別。
+\end{term}
 
-\noindent\textbf{マハラノビス距離による判別}：標本平均 $\bar{\bm x}$，標本分散共分散行列 $S$ として，
+\begin{term}{マハラノビス距離による判別}
+標本平均 $\bar{\bm x}$，標本分散共分散行列 $S$ として，
 \[
 D^2(\bm x) = (\bm x-\bar{\bm x})^T S^{-1}(\bm x-\bar{\bm x})
 \]
@@ -1062,52 +1332,67 @@ D^2(\bm x) = (\bm x-\bar{\bm x})^T S^{-1}(\bm x-\bar{\bm x})
 f(\bm x) = (\bar{\bm x}^{(1)}-\bar{\bm x}^{(2)})^T S_W^{-1}\bm x - \tfrac12(\bar{\bm x}^{(1)}-\bar{\bm x}^{(2)})^T S_W^{-1}(\bar{\bm x}^{(1)}+\bar{\bm x}^{(2)})
 \]
 （フィッシャーの線形判別関数の$-2$倍に等しく，判別結果は一致）。
+\end{term}
 
-\noindent\textbf{2次判別分析}：群1,2の標本分散共分散行列 $S_1,S_2$ として，
+\begin{term}{2次判別分析}
+群1,2の標本分散共分散行列 $S_1,S_2$ として，
 \[
 Q(\bm x) = -\tfrac12\log\frac{|S_2|}{|S_1|} - \tfrac12(\bm x-\bar{\bm x}^{(1)})^TS_1^{-1}(\bm x-\bar{\bm x}^{(1)}) + \tfrac12(\bm x-\bar{\bm x}^{(2)})^TS_2^{-1}(\bm x-\bar{\bm x}^{(2)})
 \]
 の符号で判別。
+\end{term}
 
-\noindent\textbf{ベイズ判別}：ベイズの定理より，
+\begin{term}{ベイズ判別}
+ベイズの定理より，
 \[
 \log\frac{P(G_1\mid \bm x)}{P(G_2\mid \bm x)} = \log\frac{P(\bm x\mid G_1)}{P(\bm x\mid G_2)} + \log\frac{P(G_1)}{P(G_2)}
 \]
 $P(G_1)=P(G_2)$かつ同一の分散共分散行列をもつ多変量正規分布を仮定すればマハラノビス距離による判別と一致。
+\end{term}
 
-\noindent\textbf{正準判別分析}：$g$個の群を低次元へ射影。射影軸 $y=\bm w^T\bm x$ の係数ベクトル $\bm w$ は，群間変動対群内変動比の最大化を通して $S_W^{-1}S_B$ の最大固有値に対する固有ベクトルとして得られる。ここで，
+\begin{term}{正準判別分析}
+$g$個の群を低次元へ射影。射影軸 $y=\bm w^T\bm x$ の係数ベクトル $\bm w$ は，群間変動対群内変動比の最大化を通して $S_W^{-1}S_B$ の最大固有値に対する固有ベクトルとして得られる。ここで，
 \[
 S_B = \sum_{i=1}^g n_i(\bar{\bm x}^{(i)}-\bar{\bm x})(\bar{\bm x}^{(i)}-\bar{\bm x})^T,
 \qquad
 S_W = \sum_{i=1}^g (n_i-1)S_i
 \]
+\end{term}
 
-\noindent\textbf{ハードマージンSVM}：$y_i(\bm w^T\bm x_i+b)\ge1$のもとで $\tfrac12\|\bm w\|^2$ を最小化。解：
+\begin{term}{ハードマージンSVM}
+$y_i(\bm w^T\bm x_i+b)\ge1$のもとで $\tfrac12\|\bm w\|^2$ を最小化。解：
 \[
 \bm w = \sum_i \alpha_i y_i \bm x_i
 \]
 サポートベクター $\bm x_+,\bm x_-$ を用い，マージンを最大化するように $\bm w,b$ を決める。
+\end{term}
 
-\noindent\textbf{ソフトマージンSVM}：スラック変数 $\xi_i\ge0$，$y_i(\bm w^T\bm x_i+b)\ge1-\xi_i$のもとで，
+\begin{term}{ソフトマージンSVM}
+スラック変数 $\xi_i\ge0$，$y_i(\bm w^T\bm x_i+b)\ge1-\xi_i$のもとで，
 \[
 \tfrac12\|\bm w\|^2 + \lambda\sum_i \xi_i \ \to\ \min
 \]
+\end{term}
 
-\noindent\textbf{混同行列と評価指標}：
+\begin{term}{混同行列と評価指標}
 \[
 \text{TPR（真陽性率・感度）} = \frac{TP}{TP+FN}, \qquad
 \text{FPR（偽陽性率）} = \frac{FP}{FP+TN}
 \]
 \textbf{特異度} $=1-\text{FPR}$。判別のしきい値を動かして横軸FPR，縦軸TPRでプロットしたものが\textbf{ROC曲線}，その下側面積が\textbf{AUC}（AUCが1に近いほど判別器の性能が良い）。
+\end{term}
 
 \section{クラスター分析}
 
-\textbf{ユークリッド距離}：$\bm x=(x_1,\dots,x_p),\bm y=(y_1,\dots,y_p)$ に対し，
+\begin{term}{ユークリッド距離}
+$\bm x=(x_1,\dots,x_p),\bm y=(y_1,\dots,y_p)$ に対し，
 \[
 d(\bm x,\bm y) = \sqrt{\sum_{k=1}^p (x_k-y_k)^2}
 \]
+\end{term}
 
-\noindent\textbf{階層的クラスタリング}：距離の近いクラスターを順次融合。融合過程を表す図を\textbf{デンドログラム}という。クラスター間距離の定義：
+\begin{term}{階層的クラスタリング}
+距離の近いクラスターを順次融合。融合過程を表す図を\textbf{デンドログラム}という。クラスター間距離の定義：
 \begin{itemize}
 \item \textbf{最短距離法（最近隣法）}：2クラスターから1個体ずつ選んだ距離のうち最小のもの。鎖効果を起こしやすい。
 \item \textbf{最長距離法（最遠隣法）}：距離のうち最大のもの。
@@ -1115,8 +1400,9 @@ d(\bm x,\bm y) = \sqrt{\sum_{k=1}^p (x_k-y_k)^2}
 \item \textbf{重心法}：クラスター内の重心どうしの距離。
 \item \textbf{ウォード法}：クラスター内データの重心からの距離の2乗和の増分が最小となるクラスターを合併。
 \end{itemize}
+\end{term}
 
-\noindent\textbf{K-means法}：
+\begin{term}{K-means法}
 \begin{enumerate}[label=\arabic*.]
 \item クラスターの数を決める。
 \item クラスター中心をランダムに決める。
@@ -1125,6 +1411,7 @@ d(\bm x,\bm y) = \sqrt{\sum_{k=1}^p (x_k-y_k)^2}
 \item クラスターの重心を計算して中心を更新する。
 \item 3〜5をくり返し，クラスター間の移動がなくなったら終了。
 \end{enumerate}
+\end{term}
 
 
 \section{因子分析・グラフィカルモデル}
@@ -1141,47 +1428,65 @@ $\beta_{ij}$：\textbf{因子負荷量}。$f_1,f_2,d_1,d_2,d_3$は互いに独�
 \]
 $\beta_{11}^2+\beta_{12}^2$を\textbf{共通性}，$\sigma_1^2$を\textbf{独自性}という。
 
-\noindent\textbf{寄与率}（$f_1$の寄与率，上の例）：
+\begin{term}{寄与率}
+（$f_1$の寄与率，上の例）：
 \[
 \frac{\beta_{11}^2+\beta_{21}^2+\beta_{31}^2}{3}
 \]
+\end{term}
 
-\noindent\textbf{因子軸の回転}：直交回転の代表例が\textbf{バリマックス回転}，斜交回転の代表例が\textbf{プロマックス回転}。
+\begin{term}{因子軸の回転}
+直交回転の代表例が\textbf{バリマックス回転}，斜交回転の代表例が\textbf{プロマックス回転}。
+\end{term}
 
-\noindent\textbf{操作変数法}：パス図に対応する\textbf{構造方程式}を，例えば $Z=aX+bY+u,\ Y=cX+v$ とする。$E[X]=E[Y]=E[Z]=0,\ V[X]=V[Y]=V[Z]=1$，$u$は$X,Y$と，$v$は$X$と無相関を仮定。構造方程式に操作変数をかけて期待値をとると，
+\begin{term}{操作変数法}
+パス図に対応する\textbf{構造方程式}を，例えば $Z=aX+bY+u,\ Y=cX+v$ とする。$E[X]=E[Y]=E[Z]=0,\ V[X]=V[Y]=V[Z]=1$，$u$は$X,Y$と，$v$は$X$と無相関を仮定。構造方程式に操作変数をかけて期待値をとると，
 \[
 Y=cX+v \ \Rightarrow\ E[XY]=cE[X^2] \ \Rightarrow\ c = r_{XY}
 \]
 同様に，$Z=aX+bY+u$ から $r_{XZ}=a+bc$。$a$は$X\to Z$の\textbf{直接効果}，$bc$は$X\to Y\to Z$の\textbf{間接効果}，両者の和が\textbf{総合効果}。
+\end{term}
 
-\noindent\textbf{グラフィカルモデル}：$(X_1,\dots,X_d)$が$d$変量正規分布のとき，変数を頂点に，条件付き独立性を辺の有無で表現。相関行列の逆行列の$(1,2)$成分が0なら，$X_1,X_2$は他の変数を与えたもとで条件付き独立（辺なし）。
+\begin{term}{グラフィカルモデル}
+$(X_1,\dots,X_d)$が$d$変量正規分布のとき，変数を頂点に，条件付き独立性を辺の有無で表現。相関行列の逆行列の$(1,2)$成分が0なら，$X_1,X_2$は他の変数を与えたもとで条件付き独立（辺なし）。
+\end{term}
 
 \section{その他の多変量解析手法}
 
-\noindent\textbf{多次元尺度構成法}：$n$次距離行列 $D$，$n$次単位行列 $I_n$，全成分1の$n$次正方行列 $J_n$ として，
+\begin{term}{多次元尺度構成法}
+$n$次距離行列 $D$，$n$次単位行列 $I_n$，全成分1の$n$次正方行列 $J_n$ として，
 \begin{enumerate}[label=\arabic*.]
 \item $B = -\dfrac12\left(I_n-\dfrac1n J_n\right)D^{(2)}\left(I_n-\dfrac1n J_n\right)$（$D^{(2)}$は$D$の各成分を2乗した行列）を計算。
 \item $B$の固有値・互いに直交するノルム1の固有ベクトルを求める。正の固有値を並べた対角行列 $\Lambda$，固有ベクトルを並べた $U$ として，$B=U\Lambda U^T$。
 \item $XX^T=B$ を満たす $X=U\Lambda^{1/2}$ をとる（$d$次元座標には固有値・固有ベクトルを$d$個ずつ使う）。
 \end{enumerate}
+\end{term}
 
-\noindent\textbf{正準相関分析}：$\bm x=(x_1,\dots,x_p)^T,\ \bm y=(y_1,\dots,y_q)^T$ について，
+\begin{term}{正準相関分析}
+$\bm x=(x_1,\dots,x_p)^T,\ \bm y=(y_1,\dots,y_q)^T$ について，
 \[
 u = \bm a^T\bm x,\qquad v=\bm b^T\bm y
 \]
 の相関係数が最大になるよう $\bm a,\bm b$ を決める。行列の固有値問題に帰着し，最大固有値に対する固有ベクトルから第1正準変数 $u_1,v_1$，2番目の固有値から第2正準変数 $u_2,v_2$（$u_1,v_1$と無相関）が得られる。
+\end{term}
 
-\noindent\textbf{数量化法}：質的データを数量化して多変量解析する手法（数量化I〜III類）。I類・II類は説明変数と目的変数（\textbf{外的基準}）に二分，III類は変数どうし対等（主成分分析の名義尺度版，外的基準なし）。
+\begin{term}{数量化法}
+質的データを数量化して多変量解析する手法（数量化I〜III類）。I類・II類は説明変数と目的変数（\textbf{外的基準}）に二分，III類は変数どうし対等（主成分分析の名義尺度版，外的基準なし）。
+\end{term}
 
 \section{時系列解析}
 
 確率変数 $Y_t\ (t=1,2,\dots)$。
 
-\noindent\textbf{弱定常過程（共分散定常過程）}：平均・分散が一定，$h$次自己共分散 $\Cov[Y_t,Y_{t-h}]=\gamma_h$ が時点によらない。$V[Y_t]=\gamma_0$，$h$次自己相関係数 $\gamma_h/\gamma_0$。
+\begin{term}{弱定常過程（共分散定常過程）}
+平均・分散が一定，$h$次自己共分散 $\Cov[Y_t,Y_{t-h}]=\gamma_h$ が時点によらない。$V[Y_t]=\gamma_0$，$h$次自己相関係数 $\gamma_h/\gamma_0$。
+\end{term}
 
-\noindent\textbf{ホワイトノイズ}：平均0，分散一定，0でないラグの自己共分散がすべて0。$U_t$：分散$\sigma^2$のホワイトノイズ。
+\begin{term}{ホワイトノイズ}
+平均0，分散一定，0でないラグの自己共分散がすべて0。$U_t$：分散$\sigma^2$のホワイトノイズ。
+\end{term}
 
-\noindent\textbf{$p$次自己回帰過程 AR($p$)}：
+\begin{term}{$p$次自己回帰過程 AR($p$)}
 \[
 Y_t = c+\varphi_1Y_{t-1}+\cdots+\varphi_pY_{t-p}+U_t
 \]
@@ -1192,8 +1497,9 @@ V[Y_t]=\frac{\sigma^2}{1-\varphi_1^2},\quad
 \gamma_h=\varphi_1^{|h|}\frac{\sigma^2}{1-\varphi_1^2},\quad
 \rho_h=\varphi_1^{|h|}
 \]
+\end{term}
 
-\noindent\textbf{$q$次移動平均過程 MA($q$)}：
+\begin{term}{$q$次移動平均過程 MA($q$)}
 \[
 Y_t = c+U_t+\theta_1U_{t-1}+\cdots+\theta_qU_{t-q}
 \]
@@ -1203,8 +1509,9 @@ E[Y_t]=c,\quad V[Y_t]=(1+\theta_1^2)\sigma^2,\quad
 \gamma_1=\theta_1\sigma^2,\quad
 \rho_1=\frac{\theta_1}{1+\theta_1^2},\quad \gamma_h=\rho_h=0\ (h\ge2)
 \]
+\end{term}
 
-\noindent\textbf{$(p,q)$次自己回帰移動平均過程 ARMA($p,q$)}：
+\begin{term}{$(p,q)$次自己回帰移動平均過程 ARMA($p,q$)}
 \[
 Y_t = c+\varphi_1Y_{t-1}+\cdots+\varphi_pY_{t-p}+U_t+\theta_1U_{t-1}+\cdots+\theta_qU_{t-q}
 \]
@@ -1213,18 +1520,26 @@ $p=0$でMA過程，$q=0$でAR過程，$p=q=0$でホワイトノイズ。AR部分
 1-\varphi_1z-\varphi_2z^2-\cdots-\varphi_pz^p = 0
 \]
 のすべての解の絶対値が1より大きいことと同値。
+\end{term}
 
-\noindent\textbf{$(p,1,q)$次自己回帰和分移動平均過程 ARIMA($p,1,q$)}：$\{Y_t\}$は弱定常ではないが，差分系列 $\Delta Y_t=Y_t-Y_{t-1}$ が弱定常かつ反転可能なARMA過程。\textbf{反転可能}：MA部分がAR部分に書き直せること，
+\begin{term}{$(p,1,q)$次自己回帰和分移動平均過程 ARIMA($p,1,q$)}
+$\{Y_t\}$は弱定常ではないが，差分系列 $\Delta Y_t=Y_t-Y_{t-1}$ が弱定常かつ反転可能なARMA過程。\textbf{反転可能}：MA部分がAR部分に書き直せること，
 \[
 1+\theta_1z+\theta_2z^2+\cdots+\theta_qz^q = 0
 \]
 のすべての解の絶対値が1より大きいことと同値。
+\end{term}
 
-\noindent\textbf{ディッキー・フラー検定}：AR(1)モデル $Y_t=\varphi Y_{t-1}+U_t$ について，帰無仮説 $\varphi=1$，対立仮説 $|\varphi|<1$。
+\begin{term}{ディッキー・フラー検定}
+AR(1)モデル $Y_t=\varphi Y_{t-1}+U_t$ について，帰無仮説 $\varphi=1$，対立仮説 $|\varphi|<1$。
+\end{term}
 
-\noindent\textbf{状態空間モデル}：状態方程式（時点$t-1$の状態＋誤差）と観測方程式（時点$t$の状態＋観測誤差）を組み合わせたモデル。
+\begin{term}{状態空間モデル}
+状態方程式（時点$t-1$の状態＋誤差）と観測方程式（時点$t$の状態＋観測誤差）を組み合わせたモデル。
+\end{term}
 
-\noindent\textbf{ACFとPACF}：$h$次自己相関係数 $\gamma_h/\gamma_0$ を$h$の関数と見たものが\textbf{自己相関関数（ACF）}。$Y_t,Y_{t-h}$間の相関から間の$Y_{t-1},\dots,Y_{t-h+1}$の影響を除いたものが偏自己相関係数で，これを$h$の関数と見たものが\textbf{偏自己相関関数（PACF）}。
+\begin{term}{ACFとPACF}
+$h$次自己相関係数 $\gamma_h/\gamma_0$ を$h$の関数と見たものが\textbf{自己相関関数（ACF）}。$Y_t,Y_{t-h}$間の相関から間の$Y_{t-1},\dots,Y_{t-h+1}$の影響を除いたものが偏自己相関係数で，これを$h$の関数と見たものが\textbf{偏自己相関関数（PACF）}。
 \[
 \begin{array}{lcc}
 \text{モデル} & \text{ACF} & \text{PACF}\\\hline
@@ -1234,14 +1549,18 @@ $p=0$でMA過程，$q=0$でAR過程，$p=q=0$でホワイトノイズ。AR部分
 \end{array}
 \]
 標本ACFのグラフを\textbf{コレログラム}という。
+\end{term}
 
-\noindent\textbf{ダービン・ワトソン検定}：誤差項 $u_t$ にAR(1)モデル $u_t=\rho u_{t-1}+U_t$ を仮定，帰無仮説 $\rho=0$。最小2乗法の残差 $e_t$ を用いて，
+\begin{term}{ダービン・ワトソン検定}
+誤差項 $u_t$ にAR(1)モデル $u_t=\rho u_{t-1}+U_t$ を仮定，帰無仮説 $\rho=0$。最小2乗法の残差 $e_t$ を用いて，
 \[
 DW = \frac{\sum_{t=2}^n (e_t-e_{t-1})^2}{\sum_{t=1}^n e_t^2} \ \approx\ 2(1-\hat\rho)
 \]
 $DW$が2に近ければ帰無仮説を支持，0や4に近ければ棄却。
+\end{term}
 
-\noindent\textbf{スペクトル密度関数}：AR(1)モデル $Y_t=c+\varphi Y_{t-1}+U_t\ (-1<\varphi<1)$：
+\begin{term}{スペクトル密度関数}
+AR(1)モデル $Y_t=c+\varphi Y_{t-1}+U_t\ (-1<\varphi<1)$：
 \[
 f(\lambda) = \frac{\sigma^2}{2\pi}\cdot\frac{1}{1-2\varphi\cos\lambda+\varphi^2}
 \]
@@ -1250,18 +1569,24 @@ MA(1)モデル $Y_t=c+U_t+\theta U_{t-1}$：
 f(\lambda) = \frac{\sigma^2}{2\pi}\big(1+2\theta\cos\lambda+\theta^2\big)
 \]
 標本から求めた推定値を\textbf{ペリオドグラム}という。
+\end{term}
 
 \section{分割表}
 
 $a\times b$分割表。変数を\textbf{因子}，カテゴリーを\textbf{水準}という。
 
-\noindent\textbf{相対リスク}：発症率の比。喫煙群0.15，非喫煙群0.03なら相対リスク $=0.15/0.03=5$。\\
+\begin{term}{相対リスク}
+発症率の比。喫煙群0.15，非喫煙群0.03なら相対リスク $=0.15/0.03=5$。\\
 \textbf{前向き研究}／\textbf{後向き研究}，\textbf{コホート研究}／\textbf{ケースコントロール研究}。
+\end{term}
 
-\noindent\textbf{オッズ}：$\dfrac{\text{成功確率}}{\text{失敗確率}}$。回復確率0.8なら，オッズ $=0.8/0.2=4$。\\
+\begin{term}{オッズ}
+$\dfrac{\text{成功確率}}{\text{失敗確率}}$。回復確率0.8なら，オッズ $=0.8/0.2=4$。\\
 \textbf{オッズ比}：オッズの比。
+\end{term}
 
-\noindent\textbf{標本オッズ・標本オッズ比}：$2\times2$分割表の度数を $a,b,c,d$（行1: $a,b$，行2: $c,d$）とすると，
+\begin{term}{標本オッズ・標本オッズ比}
+$2\times2$分割表の度数を $a,b,c,d$（行1: $a,b$，行2: $c,d$）とすると，
 \[
 \text{標本オッズ比} = \frac{a/b}{c/d} = \frac{ad}{bc}
 \]
@@ -1269,10 +1594,14 @@ $a\times b$分割表。変数を\textbf{因子}，カテゴリーを\textbf{水�
 \[
 \mathrm{se}(\log(\mathrm{OR})) = \sqrt{\frac1a+\frac1b+\frac1c+\frac1d}
 \]
+\end{term}
 
-\noindent\textbf{フィッシャーの正確検定}：2元分割表の独立性を，超幾何分布による$P$値の直接計算で検定する。行和・列和を固定した上で，観測結果以上に極端な結果となる確率を超幾何分布の確率関数の和として求める。
+\begin{term}{フィッシャーの正確検定}
+2元分割表の独立性を，超幾何分布による$P$値の直接計算で検定する。行和・列和を固定した上で，観測結果以上に極端な結果となる確率を超幾何分布の確率関数の和として求める。
+\end{term}
 
-\noindent\textbf{独立性の検定}：$a\times b$分割表，全体度数 $n$，$(i,j)$セルの度数 $n_{ij}$，行和 $n_{i\cdot}$，列和 $n_{\cdot j}$ として，
+\begin{term}{独立性の検定}
+$a\times b$分割表，全体度数 $n$，$(i,j)$セルの度数 $n_{ij}$，行和 $n_{i\cdot}$，列和 $n_{\cdot j}$ として，
 \[
 \chi^2 = \sum_{i=1}^a\sum_{j=1}^b \frac{\left(n_{ij}-\dfrac{n_{i\cdot}n_{\cdot j}}{n}\right)^2}{\dfrac{n_{i\cdot}n_{\cdot j}}{n}}
 \ \to_d\ \chi^2\big((a-1)(b-1)\big)
@@ -1285,52 +1614,71 @@ $a\times b$分割表。変数を\textbf{因子}，カテゴリーを\textbf{水�
 \[
 \chi^2_{Yates} = \frac{n\big(|ad-bc|-n/2\big)^2}{(a+b)(c+d)(a+c)(b+d)}
 \]
+\end{term}
 
-\noindent\textbf{クラメールの連関係数}：
+\begin{term}{クラメールの連関係数}
 \[
 V = \sqrt{\frac{\chi^2}{n(k-1)}}
 \]
 （$k$：分割表の行数・列数のうち大きくない方）。$0\le V\le1$。
+\end{term}
 
-\noindent\textbf{逸脱度}：フルモデルの尤度と一部のパラメータを0とおいたモデルの尤度の比を $\lambda$，観測度数 $x_{ij}$，モデルのもとでの期待度数 $m_{ij}$として，
+\begin{term}{逸脱度}
+フルモデルの尤度と一部のパラメータを0とおいたモデルの尤度の比を $\lambda$，観測度数 $x_{ij}$，モデルのもとでの期待度数 $m_{ij}$として，
 \[
 -2\log\lambda = 2\sum_{i,j} x_{ij}\log\frac{x_{ij}}{m_{ij}} \ \to_d\ \chi^2
 \]
 （自由度＝帰無仮説と対立仮説の自由パラメータ数の差）
+\end{term}
 
-\noindent\textbf{対数線形モデル}：3元分割表のフルモデルは，同時確率 $p_{ijk}$ について，
+\begin{term}{対数線形モデル}
+3元分割表のフルモデルは，同時確率 $p_{ijk}$ について，
 \[
 \log p_{ijk} = \mu + \alpha_i+\beta_j+\gamma_k + (\alpha\beta)_{ij}+(\alpha\gamma)_{ik}+(\beta\gamma)_{jk}+(\alpha\beta\gamma)_{ijk}
 \]
 交互作用項がある場合，それに含まれる低次の交互作用項と主効果項をすべて含むものを\textbf{階層的対数線形モデル}，主効果項から高次交互作用項をたどって見つかる極大項の集合を\textbf{生成集合}という。
+\end{term}
 
-\noindent\textbf{無向独立グラフ}：因子を頂点，2因子交互作用を含む頂点間に辺をひいたグラフ。\\
+\begin{term}{無向独立グラフ}
+因子を頂点，2因子交互作用を含む頂点間に辺をひいたグラフ。\\
 \textbf{グラフィカルモデル}：無向独立グラフのクリークが生成集合となる階層的対数線形モデル。\\
 \textbf{分解可能モデル}：対応する無向独立グラフが長さ4以上の弦のない閉路を持たないグラフィカルモデル。
+\end{term}
 
 
 \section{不完全データの統計処理}
 
-\noindent\textbf{打ち切り}：ある値以上（または以下）であることはわかるが，その値自体は得られないタイプの欠測。\\
+\begin{term}{打ち切り}
+ある値以上（または以下）であることはわかるが，その値自体は得られないタイプの欠測。\\
 \textbf{トランケーション}：特定の幅の値しか観測できず，この幅に入っていないデータの個数もわからないタイプの欠測。
+\end{term}
 
-\noindent\textbf{欠測メカニズム}：
+\begin{term}{欠測メカニズム}
 \begin{itemize}
 \item \textbf{MCAR}（Missing Completely At Random）：欠測が観測データにも欠測データにも依存しない。
 \item \textbf{MAR}（Missing At Random）：欠測が観測データには依存するが，欠測している値自体には依存しない。
 \item \textbf{MNAR}（Missing Not At Random）：欠測が欠測している値自体に依存する。
 \end{itemize}
+\end{term}
 
-\noindent\textbf{CC(complete case)解析}：欠測が生じた個体を除いた解析。サンプルサイズ減少により精度・検出力が下がり，MCAR以外ではバイアスが生じる。
+\begin{term}{CC(complete case)解析}
+欠測が生じた個体を除いた解析。サンプルサイズ減少により精度・検出力が下がり，MCAR以外ではバイアスが生じる。
+\end{term}
 
-\noindent\textbf{単一値代入法}：平均値代入，回帰代入，確率的回帰代入，ホットデック法などがある。
+\begin{term}{単一値代入法}
+平均値代入，回帰代入，確率的回帰代入，ホットデック法などがある。
+\end{term}
 
-\noindent\textbf{多重代入法}：複数組の擬似的な完全データを作成し，独立に推定値を計算して統合する。不確実性を作り出し，単一代入法での誤差の過小評価を補正する。
+\begin{term}{多重代入法}
+複数組の擬似的な完全データを作成し，独立に推定値を計算して統合する。不確実性を作り出し，単一代入法での誤差の過小評価を補正する。
+\end{term}
 
-\noindent\textbf{1変量正規分布における推測}：$X\sim N(\mu,\sigma^2)$，標準正規密度$\varphi$，累積分布関数$\Phi$，$a=(c-\mu)/\sigma$として，$X\ge c$のもとでの条件付き期待値：
+\begin{term}{1変量正規分布における推測}
+$X\sim N(\mu,\sigma^2)$，標準正規密度$\varphi$，累積分布関数$\Phi$，$a=(c-\mu)/\sigma$として，$X\ge c$のもとでの条件付き期待値：
 \[
 E[X\mid X\ge c] = \mu+\sigma\cdot\frac{\varphi(a)}{1-\Phi(a)}
 \]
+\end{term}
 
 打ち切りの場合（$c$以上が観測されない，$\sigma^2$既知，サンプルサイズ$n$，観測データサイズ$m<n$）の母平均$\mu$の最尤推定手順：
 \begin{enumerate}[label=\arabic*.]
@@ -1344,7 +1692,8 @@ E[X\mid X\ge c] = \mu+\sigma\cdot\frac{\varphi(a)}{1-\Phi(a)}
 \mu^{(t+1)} = \bar x_{\text{obs}} - \sigma\frac{\varphi(a^{(t)})}{1-\Phi(a^{(t)})}
 \]
 
-\noindent\textbf{2変量正規分布における推測（MAR，$Y$のみ欠測）}：観測データ $(x_1,y_1),\dots,(x_m,y_m),x_{m+1},\dots,x_n$（$m<n$）。
+\begin{term}{2変量正規分布における推測（MAR，$Y$のみ欠測）}
+観測データ $(x_1,y_1),\dots,(x_m,y_m),x_{m+1},\dots,x_n$（$m<n$）。
 \begin{enumerate}[label=\arabic*.]
 \item サイズ$n$のデータから $\hat\mu_X=\bar x$（全$n$個），$\hat\sigma_X^2$ の最尤推定値を計算。
 \item サイズ$m$のデータから $\bar x_{(m)},S_X^2,\bar y,S_Y^2,S_{XY}$ を計算。
@@ -1355,19 +1704,22 @@ E[X\mid X\ge c] = \mu+\sigma\cdot\frac{\varphi(a)}{1-\Phi(a)}
 \item $\mu_Y=\alpha+\beta\hat\mu_X$，$\sigma_Y^2=\tau^2+\beta^2\hat\sigma_X^2$，$\sigma_{XY}=\beta\hat\sigma_X^2$ の最尤推定値を計算。
 \end{enumerate}
 MCARの場合は観測されている $(x_1,y_1),\dots,(x_m,y_m)$ のみを用いればよい。
+\end{term}
 
 \section{モデル選択}
 
-\noindent\textbf{AIC（赤池情報量規準）}：
+\begin{term}{AIC（赤池情報量規準）}
 \[
 \mathrm{AIC} = -2\times(\text{最大対数尤度}) + 2\times(\text{推定パラメータ数})
 \]
+\end{term}
 
-\noindent\textbf{BIC（ベイズ情報量規準）}：
+\begin{term}{BIC（ベイズ情報量規準）}
 \[
 \mathrm{BIC} = -2\times(\text{最大対数尤度}) + \log(n)\times(\text{推定パラメータ数})
 \]
 どちらも数値が小さいモデルを最適とする。
+\end{term}
 
 説明変数$p$個の重回帰モデル（誤差項独立同一正規分布，サンプルサイズ$n$，誤差分散の最尤推定量 $\hat\sigma^2$，推定パラメータ数 $=p+2$）：
 \[
@@ -1377,22 +1729,28 @@ MCARの場合は観測されている $(x_1,y_1),\dots,(x_m,y_m)$ のみを用�
 \]
 通常 $\log(n)>2$ なので，BICの方がAICよりパラメータ数への罰則が強く，パラメータ数の少ないモデルを選ぶ傾向がある。BICにはモデル選択の一致性があり，真のモデルが候補にあれば $n\to\infty$ で真のモデルを選ぶ確率が1に収束する。
 
-\noindent\textbf{交差検証法（クロスバリデーション）}：データを訓練用・テスト用に分け，訓練用で推定，テスト用で予測誤差を検証することを繰り返し，予測誤差最小のモデルを選ぶ。
+\begin{term}{交差検証法（クロスバリデーション）}
+データを訓練用・テスト用に分け，訓練用で推定，テスト用で予測誤差を検証することを繰り返し，予測誤差最小のモデルを選ぶ。
+\end{term}
 
-\noindent\textbf{Leave-one-out法}：
+\begin{term}{Leave-one-out法}
 \begin{enumerate}[label=\arabic*.]
 \item $i$番目のデータを除いた$n-1$個を訓練用としてモデルを推定する。
 \item 推定モデルで$i$番目のデータへの予測誤差を求める。
 \item すべての$i$についての予測誤差の平均でモデルを評価する。
 \end{enumerate}
+\end{term}
 
-\noindent\textbf{$k$分割交差検証法}：データを$k$グループに分割し，1グループをテスト用，残り$k-1$グループを訓練用として予測誤差を$k$回求める。$k=n$がLeave-one-out法。
+\begin{term}{$k$分割交差検証法}
+データを$k$グループに分割し，1グループをテスト用，残り$k-1$グループを訓練用として予測誤差を$k$回求める。$k=n$がLeave-one-out法。
+\end{term}
 
 \section{ベイズ法}
 
 パラメータ自体が確率分布に従うと仮定し，データを得る前の\textbf{事前分布}をデータの情報を反映した\textbf{事後分布}に更新する。
 
-\noindent\textbf{共役事前分布}：事前分布と事後分布が同じタイプになる事前分布。
+\begin{term}{共役事前分布}
+事前分布と事後分布が同じタイプになる事前分布。
 \[
 \begin{array}{lll}
 \text{標本分布} & \text{事前分布} & \text{事後分布}\\\hline
@@ -1401,19 +1759,26 @@ Y_i\mid\theta\sim Po(\theta) & \theta\sim Ga(a,1/b) & \theta\mid\bm y\sim Ga\!\l
 Y_i\mid\theta\sim N(\theta,\sigma^2) & \theta\sim N(\mu_0,\sigma_0^2) & \theta\mid\bm y\sim N\!\left(\dfrac{\sigma^2\mu_0+n\sigma_0^2\bar y}{\sigma^2+n\sigma_0^2},\ \dfrac{\sigma^2\sigma_0^2}{\sigma^2+n\sigma_0^2}\right)
 \end{array}
 \]
+\end{term}
 
-\noindent\textbf{ベータ二項モデル}：$n$回中$y$回成功のとき，事後分布は $Be(a+y,\,b+n-y)$。\\
+\begin{term}{ベータ二項モデル}
+$n$回中$y$回成功のとき，事後分布は $Be(a+y,\,b+n-y)$。\\
 \textbf{ガンマポアソンモデル}：事後分布は $Ga\!\left(a+\sum y_i,\ 1/(b+n)\right)$。\\
 \textbf{正規-正規モデル}：事後分布は上表の通り。
+\end{term}
 
-\noindent\textbf{ベイズ推定量}：事後分布の期待値。$Ga(a,b)$の期待値 $=ab$，$Be(a,b)$の期待値 $=a/(a+b)$。\\
+\begin{term}{ベイズ推定量}
+事後分布の期待値。$Ga(a,b)$の期待値 $=ab$，$Be(a,b)$の期待値 $=a/(a+b)$。\\
 \textbf{MAP推定量}：事後分布のモード。$Ga(a,b)$（$a>1$）のモード $=(a-1)b$，$Be(a,b)$（$a,b>1$）のモード $=(a-1)/(a+b-2)$。\\
 \textbf{ベイズ予測分布}：事後分布を用いて新たなデータを予測する確率分布。\\
 \textbf{$100(1-\alpha)\%$信用区間}：事後分布の積分値が$1-\alpha$になる区間。\textbf{95\%最大事後密度(HPD)区間}：事後密度の高い方から積分値0.95になるように区間$[L(\bm x),U(\bm x)]$をとったもの。
+\end{term}
 
-\noindent\textbf{MCMC法}：事後分布 $\pi(\bm\theta\mid\bm x)$ からの多数の独立なサンプルを近似的に得る手法。
+\begin{term}{MCMC法}
+事後分布 $\pi(\bm\theta\mid\bm x)$ からの多数の独立なサンプルを近似的に得る手法。
+\end{term}
 
-\noindent\textbf{メトロポリス法}：
+\begin{term}{メトロポリス法}
 \begin{enumerate}[label=\arabic*.]
 \item 初期値 $\bm\theta^{(0)}$ を決め，$t=0$として2へ。
 \item $\bm\theta' = \bm\theta^{(t)}+\bm u$（$\bm u$は成分独立に対称分布）を発生させる。
@@ -1424,41 +1789,55 @@ r = \frac{\pi(\bm\theta'\mid\bm x)}{\pi(\bm\theta^{(t)}\mid\bm x)}
 を計算。$r\ge1$なら $\bm\theta^{(t+1)}=\bm\theta'$。$r<1$のとき $r\ge v$なら $\bm\theta^{(t+1)}=\bm\theta'$，$r<v$なら $\bm\theta^{(t+1)}=\bm\theta^{(t)}$。
 \item $t\to t+1$として，十分なサンプルが得られるまで2,3を繰り返す。
 \end{enumerate}
+\end{term}
 
-\noindent\textbf{メトロポリス・ヘイスティングス法}：手順2で $\bm\theta'$を非対称な提案分布 $q(\bm\theta\mid\bm\theta^{(t)})$ から発生させ，手順3を，
+\begin{term}{メトロポリス・ヘイスティングス法}
+手順2で $\bm\theta'$を非対称な提案分布 $q(\bm\theta\mid\bm\theta^{(t)})$ から発生させ，手順3を，
 \[
 r = \frac{\pi(\bm\theta'\mid\bm x)\,q(\bm\theta^{(t)}\mid\bm\theta')}{\pi(\bm\theta^{(t)}\mid\bm x)\,q(\bm\theta'\mid\bm\theta^{(t)})}
 \]
 に置き換えたもの。
+\end{term}
 
-\noindent\textbf{ギブスサンプリング}（2変量の場合，条件付き分布 $f(x\mid y),f(y\mid x)$ から抽出可能とする）：
+\begin{term}{ギブスサンプリング}
+（2変量の場合，条件付き分布 $f(x\mid y),f(y\mid x)$ から抽出可能とする）：
 \begin{enumerate}[label=\arabic*.]
 \item 初期値 $(x^{(0)},y^{(0)})$ を決める。
 \item $(x^{(j)},y^{(j)})$ から $y^{(j+1)} \sim f(y\mid x^{(j)})$ を得る。
 \item $y^{(j+1)}$ から $x^{(j+1)}\sim f(x\mid y^{(j+1)})$ を得る。
 \item 2,3をくり返す。
 \end{enumerate}
+\end{term}
 
 \section{シミュレーション}
 
-\noindent\textbf{擬似乱数}：一定の条件下で再現できてしまう，計算機生成の乱数。
+\begin{term}{擬似乱数}
+一定の条件下で再現できてしまう，計算機生成の乱数。
+\end{term}
 
-\noindent\textbf{逆関数法}：$U\sim U(0,1)$，$X$の累積分布関数 $F_X$として，
+\begin{term}{逆関数法}
+$U\sim U(0,1)$，$X$の累積分布関数 $F_X$として，
 \[
 X = F_X^{-1}(U)
 \]
 とすれば$X$の分布に従う乱数が得られる。
+\end{term}
 
-\noindent\textbf{採択・棄却法}：目標密度 $f(x)$，扱いやすい密度 $g(x)$，定数$R$ について，すべての$x$で $f(x)\le R\,g(x)$ が成り立つとき：
+\begin{term}{採択・棄却法}
+目標密度 $f(x)$，扱いやすい密度 $g(x)$，定数$R$ について，すべての$x$で $f(x)\le R\,g(x)$ が成り立つとき：
 \begin{enumerate}[label=\arabic*.]
 \item $y\sim g(x),\ u\sim U(0,1)$ を独立に発生。
 \item $u \le \dfrac{f(y)}{R\,g(y)}$ が成り立てば$y$を出力し，そうでなければ1に戻る。
 \end{enumerate}
 $R$をできるだけ小さくとると効率が上がる。
+\end{term}
 
-\noindent\textbf{モンテカルロ法}（面積推定）：正方形 $(0,1)\times(0,1)$内の図形$A$の面積$S$を，一様乱数$(u,v)$を$n$組発生させ，$A$内に入った個数$X$から $S\approx X/n$ と推定する（$X\sim\mathrm{Bin}(n,S)$，$V[X]=nS(1-S)$）。
+\begin{term}{モンテカルロ法}
+（面積推定）：正方形 $(0,1)\times(0,1)$内の図形$A$の面積$S$を，一様乱数$(u,v)$を$n$組発生させ，$A$内に入った個数$X$から $S\approx X/n$ と推定する（$X\sim\mathrm{Bin}(n,S)$，$V[X]=nS(1-S)$）。
+\end{term}
 
-\noindent\textbf{モンテカルロ積分}：$X\sim U(0,1)$ のとき，
+\begin{term}{モンテカルロ積分}
+$X\sim U(0,1)$ のとき，
 \[
 E[g(X)] = \int_0^1 g(x)\,dx
 \]
@@ -1475,27 +1854,34 @@ $\sigma^2=V[g(X)]$として，
 V[\hat\theta] = \frac{\sigma^2}{n}, \qquad \hat\sigma^2 = \frac1n\sum_{i=1}^n\big(g(X_i)-\hat\theta\big)^2, \qquad
 \mathrm{se}(\hat\theta) = \frac{\hat\sigma}{\sqrt n}
 \]
+\end{term}
 
-\noindent\textbf{主部の分離}：積分 $I=\int_a^b f(x)\,dx$ に対し，
+\begin{term}{主部の分離}
+積分 $I=\int_a^b f(x)\,dx$ に対し，
 \begin{enumerate}[label=\arabic*.]
 \item $f(x)$を近似する積分しやすい関数 $h(x)$ を決める（テーラー展開など）。
 \item $g(x)=f(x)-h(x)+\mu$，$\mu=\dfrac{1}{b-a}\displaystyle\int_a^b h(x)\,dx$ とおく。
 \item $X_1,\dots,X_n\sim U(a,b)$として，$\hat I = (b-a)\cdot\dfrac1n\sum_i g(X_i)$。
 \end{enumerate}
+\end{term}
 
-\noindent\textbf{負の相関の利用}：
+\begin{term}{負の相関の利用}
 \begin{enumerate}[label=\arabic*.]
 \item $g(x) = \dfrac{f(x)+f(a+b-x)}{2}$ とおく。
 \item $X_1,\dots,X_m\sim U(a,b)$として，$\hat I = (b-a)\cdot\dfrac1m\sum_i g(X_i)$。
 \end{enumerate}
+\end{term}
 
-\noindent\textbf{経験分布関数}：分布関数 $F(x)$からの無作為標本 $X_1,\dots,X_n$ に対し，
+\begin{term}{経験分布関数}
+分布関数 $F(x)$からの無作為標本 $X_1,\dots,X_n$ に対し，
 \[
 F_n(x) = \frac{1}{n}\#\{i : X_i\le x\}
 \]
 $F_n(x)$は$F(x)$に確率収束する。
+\end{term}
 
-\noindent\textbf{ジャックナイフ法}：パラメータ$\theta$の推定量 $\hat\theta$。$X_j$を除いたサイズ$n-1$の標本による推定量 $\hat\theta_{(j)}$，
+\begin{term}{ジャックナイフ法}
+パラメータ$\theta$の推定量 $\hat\theta$。$X_j$を除いたサイズ$n-1$の標本による推定量 $\hat\theta_{(j)}$，
 \[
 \overline{\hat\theta_{(\cdot)}} = \frac1n\sum_{j=1}^n \hat\theta_{(j)}
 \]
@@ -1503,8 +1889,10 @@ $F_n(x)$は$F(x)$に確率収束する。
 \[
 \widehat{\mathrm{se}}_{\mathrm{jack}}(\hat\theta) = \sqrt{\frac{n-1}{n}\sum_{j=1}^n\big(\hat\theta_{(j)}-\overline{\hat\theta_{(\cdot)}}\big)^2}
 \]
+\end{term}
 
-\noindent\textbf{ブートストラップ法}：独立同一分布 $F$ に従う $X_1,\dots,X_n$ の実現値 $x_1,\dots,x_n$ から復元抽出でサイズ$n$の標本 $\bm x^{*(b)}$ を $B$回作り，
+\begin{term}{ブートストラップ法}
+独立同一分布 $F$ に従う $X_1,\dots,X_n$ の実現値 $x_1,\dots,x_n$ から復元抽出でサイズ$n$の標本 $\bm x^{*(b)}$ を $B$回作り，
 \[
 \hat\theta^{*(1)},\dots,\hat\theta^{*(B)}, \qquad
 \bar{\hat\theta}^{*} = \frac1B\sum_{b=1}^B \hat\theta^{*(b)}
@@ -1514,5 +1902,6 @@ $F_n(x)$は$F(x)$に確率収束する。
 \widehat{\mathrm{Bias}}(\hat\theta) = \bar{\hat\theta}^{*}-\hat\theta, \qquad
 \widehat{V}(\hat\theta) = \frac{1}{B-1}\sum_{b=1}^B\big(\hat\theta^{*(b)}-\bar{\hat\theta}^{*}\big)^2
 \]
+\end{term}
 
 \end{document}
