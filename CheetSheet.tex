@@ -151,6 +151,17 @@ E[Y\mid X=x] = \int_{-\infty}^{\infty} y\,f_{Y\mid X}(y\mid x)\,dy
 E\big[E[Y\mid X]\big] = E[Y]
 \]
 
+\noindent\textbf{条件付き分散}：
+\[
+V[Y\mid X=x] = E\big[(Y-E[Y\mid X=x])^2 \,\big|\, X=x\big] = E[Y^2\mid X=x] - \big(E[Y\mid X=x]\big)^2
+\]
+
+\noindent\textbf{全分散の公式（分散分解の公式）}：
+\[
+V[Y] = E\big[V(Y\mid X)\big] + V\big[E(Y\mid X)\big]
+\]
+右辺第1項は，$X$を与えたもとでの$Y$の条件付き分散を$X$の分布で平均したもの（$X$を知ってもなお残る変動＝群内変動）。第2項は，$X$の値によって条件付き期待値$E[Y\mid X]$自体が動くことで生じる変動（$X$で説明できる変動＝群間変動）。両者の和が$Y$の分散全体に一致する。
+
 \noindent\textbf{確率変数の独立}：
 \[
 f(x,y) = f_X(x)f_Y(y) \quad(\text{または }p(x,y)=p_X(x)p_Y(y))
