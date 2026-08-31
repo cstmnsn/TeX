@@ -11,8 +11,8 @@
 \usepackage{hyperref}
 \usepackage[most]{tcolorbox}
 \usepackage{fontspec}
-\setmainfont{Harano Aji Mincho}
-\setsansfont{Harano Aji Gothic}
+\setmainfont{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
 \XeTeXlinebreaklocale "ja"
 \XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
 \setlist[itemize]{leftmargin=1.5em}
@@ -304,6 +304,7 @@ $Z$ が $X,Y$ の両方に相関があるとき，直接的な相関がなくて
 \[
 \rho_{XY\cdot Z} = \frac{\rho_{XY} - \rho_{XZ}\rho_{YZ}}{\sqrt{(1-\rho_{XZ}^2)(1-\rho_{YZ}^2)}}
 \]
+【直感的な意味】$Z$ から $X$ を回帰した際の残差と，$Z$ から $Y$ を回帰した際の残差（＝いずれも $Z$ で説明できない部分）どうしの相関係数に一致する。つまり，共通要因 $Z$ の影響を取り除いたあとに残る，$X$ と $Y$ 固有の関係の強さを表す。
 \end{term}
 
 \begin{term}{加重平均}
