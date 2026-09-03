@@ -13,8 +13,10 @@
 \usepackage{fontspec}
 \setmainfont{Noto Serif CJK JP}
 \setsansfont{Noto Sans CJK JP}
-\XeTeXlinebreaklocale "ja"
-\XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+\ifdefined\XeTeXlinebreaklocale
+  \XeTeXlinebreaklocale "ja"
+  \XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+\fi
 \setlist[itemize]{leftmargin=1.5em}
 \tolerance=2000
 \emergencystretch=3em

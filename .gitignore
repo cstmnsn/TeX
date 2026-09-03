@@ -1,0 +1,23 @@
+# LaTeX 中間ファイル（PDF は管理対象に残す）
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+*.dvi
+*.run.xml
+*.bcf
+*.idx
+*.ilg
+*.ind
