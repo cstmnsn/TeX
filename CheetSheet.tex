@@ -600,7 +600,9 @@ F=\frac{X_1/n_1}{X_2/n_2}\ \sim\ F(n_1,n_2)
 $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi^2(n_2)$独立なら，上の$F$は自由度$(n_1,n_2)$，非心度$\lambda$の非心$F$分布。
 \end{term}
 
-\section{主要分布 早見表（確率関数・期待値・分散・累積分布関数・モーメント母関数・特性関数）}
+\section{主要分布 早見表（使う場面・確率関数・期待値・分散・累積分布関数・モーメント母関数・特性関数）}
+
+各分布の先頭には，その分布がどのような状況を記述するために使われるか（「使う場面」）を付した。
 
 以下，$M_X(t)=E[e^{tX}]$（モーメント母関数），$\varphi_X(t)=E[e^{itX}]=M_X(it)$（特性関数）とする。特性関数は任意の分布で必ず存在するが，モーメント母関数は裾の重い分布（$t$分布，$F$分布，対数正規分布など）では存在しないことがある（その場合は「存在しない」と明記）。離散型の $F(x)$ は「$x$以下」の意味の階段関数（$\lfloor x\rfloor$で和を打ち切る）。初等関数で閉じない箇所は，正規分布の分布関数 $\Phi$，正則化不完全ガンマ関数 $P(a,z)=\gamma(a,z)/\Gamma(a)$，正則化不完全ベータ関数 $I_x(a,b)$，クンマーの合流型超幾何関数 ${}_1F_1$ を用いて表す（数値は数表・統計ソフトで求める）。
 
@@ -608,10 +610,11 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 \subsection*{離散型分布}
 \begin{longtable}{@{}L{2.6cm} L{12.4cm}@{}}
 \toprule
-項目 & 式 \\
+項目 & 内容 \\
 \midrule
 \endhead
 \multicolumn{2}{@{}l}{\textbf{ベルヌーイ分布 $\mathrm{Bin}(1,p)$}} \\
+使う場面 & 成功・失敗（$1$/$0$）の2値をとる1回だけの試行のモデル。二項分布・幾何分布・負の二項分布を組み立てる最小単位であり，ロジスティック回帰やプロビット回帰の応答変数もこの分布に従う。 \\
 確率関数 & $p(x)=p^x(1-p)^{1-x}\ (x=0,1)$ \\
 期待値・分散 & $E[X]=p,\quad V[X]=p(1-p)$ \\
 累積分布関数 & $F(x)=0\ (x<0),\ \ 1-p\ (0\le x<1),\ \ 1\ (x\ge1)$ \\
@@ -619,6 +622,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=1-p+pe^{it}$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{二項分布 $\mathrm{Bin}(n,p)$}} \\
+使う場面 & 成功確率$p$の独立な試行を$n$回繰り返したときの成功回数。母比率の推定・検定，符号検定の帰無分布などに用いる。$n$が大きく$p$が小さい（$np$が一定）ならポアソン分布で，$np(1-p)$が十分大きければ正規分布で近似できる。 \\
 確率関数 & $p(x)=\dbinom{n}{x}p^x(1-p)^{n-x}$ \\
 期待値・分散 & $E[X]=np,\quad V[X]=np(1-p)$ \\
 累積分布関数 & $F(x)=\displaystyle\sum_{k=0}^{\lfloor x\rfloor}\binom{n}{k}p^k(1-p)^{n-k} = I_{1-p}\big(n-\lfloor x\rfloor,\ \lfloor x\rfloor+1\big)$ \\
@@ -626,6 +630,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=(1-p+pe^{it})^n$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{ポアソン分布 $Po(\lambda)$}} \\
+使う場面 & 一定の時間・面積・個体あたりに，まれな事象が起こる回数（事故件数，来店客数，キズの個数）。ポアソン過程の計数過程，ポアソン回帰や分割表の対数線形モデルの応答分布として使う。$E[X]=V[X]=\lambda$ が特徴で，これを超える散らばり（過分散）があるときは負の二項分布を検討する。 \\
 確率関数 & $p(x)=\dfrac{e^{-\lambda}\lambda^x}{x!}$ \\
 期待値・分散 & $E[X]=\lambda,\quad V[X]=\lambda$ \\
 累積分布関数 & $F(x)=\displaystyle e^{-\lambda}\sum_{k=0}^{\lfloor x\rfloor}\frac{\lambda^k}{k!} = \frac{\Gamma(\lfloor x\rfloor+1,\lambda)}{\lfloor x\rfloor!}$（$\Gamma$は上側不完全ガンマ関数） \\
@@ -633,6 +638,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=e^{\lambda(e^{it}-1)}$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{幾何分布（失敗回数）$Geo(p)$}} \\
+使う場面 & 初めて成功するまでに要した失敗回数，すなわち離散版の待ち時間。無記憶性 $P(X\ge s+t\mid X\ge s)=P(X\ge t)$ をもつ唯一の離散分布で，連続型の指数分布に対応する。 \\
 確率関数 & $p(x)=(1-p)^x p\ (x=0,1,2,\dots)$ \\
 期待値・分散 & $E[X]=\dfrac{1-p}{p},\quad V[X]=\dfrac{1-p}{p^2}$ \\
 累積分布関数 & $F(x)=1-(1-p)^{\lfloor x\rfloor+1}\ (x\ge0)$ \\
@@ -640,6 +646,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=\dfrac{p}{1-(1-p)e^{it}}$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{負の二項分布 $NB(r,p)$}} \\
+使う場面 & $r$回目の成功が出るまでの失敗回数（$r=1$で幾何分布）。またポアソン分布の平均$\lambda$がガンマ分布に従うとした混合分布でもあり，$V[X]>E[X]$ となる過分散のカウントデータのモデルとして使われる。 \\
 確率関数 & $p(x)=\dbinom{x+r-1}{x}p^r(1-p)^x$ \\
 期待値・分散 & $E[X]=\dfrac{r(1-p)}{p},\quad V[X]=\dfrac{r(1-p)}{p^2}$ \\
 累積分布関数 & $F(x)=I_p\big(r,\ \lfloor x\rfloor+1\big)$ \\
@@ -647,6 +654,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=\left(\dfrac{p}{1-(1-p)e^{it}}\right)^{r}$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{超幾何分布 $HG(N,M,n)$}} \\
+使う場面 & 有限母集団（$N$個中に当たりが$M$個）から$n$個を非復元抽出したときの当たりの個数。抜取検査や，$2\times2$分割表に対するFisherの正確検定の帰無分布に現れる。$n/N$が小さければ二項分布 $\mathrm{Bin}(n,M/N)$ で近似でき，分散に掛かる $\frac{N-n}{N-1}$ が有限母集団修正にあたる。 \\
 確率関数 & $p(x)=\dfrac{\binom{M}{x}\binom{N-M}{n-x}}{\binom{N}{n}}$ \\
 期待値・分散 & $E[X]=\dfrac{nM}{N},\quad V[X]=n\dfrac{M}{N}\left(1-\dfrac{M}{N}\right)\dfrac{N-n}{N-1}$ \\
 累積分布関数 & $F(x)=\displaystyle\sum_{k=0}^{\lfloor x\rfloor}\frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}}$（閉じた初等表示なし） \\
@@ -658,10 +666,11 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 \subsection*{連続型分布}
 \begin{longtable}{@{}L{2.6cm} L{12.4cm}@{}}
 \toprule
-項目 & 式 \\
+項目 & 内容 \\
 \midrule
 \endhead
 \multicolumn{2}{@{}l}{\textbf{一様分布 $U(a,b)$}} \\
+使う場面 & 区間内のどこも等しくもっともらしい，という「情報のない」状態のモデル。逆関数法による乱数生成の出発点，ベイズ法の無情報事前分布，また連続分布のもとで帰無仮説が正しいときのp値の分布（$p\sim U(0,1)$）としても現れる。 \\
 確率密度関数 & $f(x)=\dfrac{1}{b-a}\ (a<x<b)$ \\
 期待値・分散 & $E[X]=\dfrac{a+b}{2},\quad V[X]=\dfrac{(b-a)^2}{12}$ \\
 累積分布関数 & $F(x)=\dfrac{x-a}{b-a}\ (a\le x\le b)$，$x<a$で$0$，$x>b$で$1$ \\
@@ -669,6 +678,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=\dfrac{e^{itb}-e^{ita}}{it(b-a)}\ (t\ne0)$，$\varphi_X(0)=1$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{指数分布 $Exp(\lambda)$}} \\
+使う場面 & ポアソン過程で事象が起こる間隔（次の事象までの待ち時間），故障率（ハザード）が一定な機器の寿命。無記憶性をもつ唯一の連続分布。$Exp(\lambda)=Ga(1,1/\lambda)$ であり，$2\lambda X\sim\chi^2(2)$ となる。 \\
 確率密度関数 & $f(x)=\lambda e^{-\lambda x}\ (x>0)$ \\
 期待値・分散 & $E[X]=\dfrac1\lambda,\quad V[X]=\dfrac1{\lambda^2}$ \\
 累積分布関数 & $F(x)=1-e^{-\lambda x}\ (x\ge0)$ \\
@@ -676,6 +686,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=\dfrac{\lambda}{\lambda-it}$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{ガンマ分布 $Ga(a,b)$}} \\
+使う場面 & 正の値をとり右に歪んだ量の一般的なモデル。$a$が整数なら $Exp(1/b)$ の$a$個の和，すなわち$a$回目の事象が起こるまでの待ち時間になる。ベイズ法ではポアソン分布の$\lambda$や正規分布の精度$1/\sigma^2$の共役事前分布として使う。 \\
 確率密度関数 & $f(x)=\dfrac{1}{\Gamma(a)b^a}x^{a-1}e^{-x/b}\ (x>0)$ \\
 期待値・分散 & $E[X]=ab,\quad V[X]=ab^2$ \\
 累積分布関数 & $F(x)=P\!\left(a,\dfrac{x}{b}\right)\ (x\ge0)$ \\
@@ -683,6 +694,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=(1-ibt)^{-a}$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{カイ2乗分布 $\chi^2(n)=Ga(n/2,2)$}} \\
+使う場面 & 標準正規変数の2乗和 $\sum_{i=1}^n Z_i^2$ の分布。正規母集団の分散の推定・検定（$\frac{(n-1)s^2}{\sigma^2}\sim\chi^2(n-1)$），適合度検定・独立性検定のPearson統計量，尤度比検定統計量 $-2\log\lambda$ の漸近分布（Wald検定・スコア検定も同様）として使う。 \\
 確率密度関数 & $f(x)=\dfrac{1}{2^{n/2}\Gamma(n/2)}x^{n/2-1}e^{-x/2}\ (x>0)$ \\
 期待値・分散 & $E[X]=n,\quad V[X]=2n$ \\
 累積分布関数 & $F(x)=P\!\left(\dfrac n2,\dfrac x2\right)\ (x\ge0)$ \\
@@ -690,6 +702,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=(1-2it)^{-n/2}$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{正規分布 $N(\mu,\sigma^2)$}} \\
+使う場面 & 中心極限定理により，標本平均や多数の微小な要因の和の近似分布として最も広く使われる。回帰分析の誤差項の仮定，最尤推定量の漸近分布 $\sqrt n(\hat\theta-\theta)\to N(0,I(\theta)^{-1})$，各種検定統計量の基礎になる。 \\
 確率密度関数 & $f(x)=\dfrac{1}{\sqrt{2\pi\sigma^2}}\exp\!\left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right)$ \\
 期待値・分散 & $E[X]=\mu,\quad V[X]=\sigma^2$ \\
 累積分布関数 & $F(x)=\Phi\!\left(\dfrac{x-\mu}{\sigma}\right)$，$\Phi(z)=\dfrac12\!\left[1+\operatorname{erf}\!\left(\dfrac{z}{\sqrt2}\right)\right]$ \\
@@ -697,6 +710,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)=\exp\!\left(i\mu t-\dfrac12\sigma^2t^2\right)$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{対数正規分布 $\Lambda(\mu,\sigma^2)$}} \\
+使う場面 & 対数をとると正規分布になる，正の値をとり右に大きく歪んだ量（所得，株価，粒径，生存時間など）。多数の要因が乗法的に効く場合，対数をとると和になり中心極限定理が働くため，この分布が現れる。 \\
 確率密度関数 & $f(x)=\dfrac{1}{x\sigma\sqrt{2\pi}}\exp\!\left(-\dfrac{(\log x-\mu)^2}{2\sigma^2}\right)\ (x>0)$ \\
 期待値・分散 & $E[X]=e^{\mu+\sigma^2/2},\quad V[X]=(e^{\sigma^2}-1)e^{2\mu+\sigma^2}$ \\
 累積分布関数 & $F(x)=\Phi\!\left(\dfrac{\log x-\mu}{\sigma}\right)\ (x>0)$ \\
@@ -704,6 +718,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & 初等関数では表せない（複雑な級数表示のみ知られる） \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{ベータ分布 $Be(a,b)$}} \\
+使う場面 & $[0,1]$上の値，すなわち割合や確率そのもののモデル。ベイズ法では二項分布の$p$に対する共役事前分布（事後分布もベータ分布）として使う。一様分布の順序統計量 $U_{(k)}\sim Be(k,n-k+1)$ でもある。 \\
 確率密度関数 & $f(x)=\dfrac{1}{B(a,b)}x^{a-1}(1-x)^{b-1}\ (0<x<1)$ \\
 期待値・分散 & $E[X]=\dfrac{a}{a+b},\quad V[X]=\dfrac{ab}{(a+b)^2(a+b+1)}$ \\
 累積分布関数 & $F(x)=I_x(a,b)\ (0<x<1)$ \\
@@ -711,6 +726,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & $\varphi_X(t)={}_1F_1(a;a+b;it)$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{$t$分布 $t(n)$}} \\
+使う場面 & 母分散が未知のため$\sigma$を標本標準偏差$s$で置き換えた統計量の分布。1標本・2標本の母平均の検定と区間推定，回帰係数の$t$検定に用いる。正規分布より裾が重く，$n\to\infty$で$N(0,1)$に収束する。 \\
 確率密度関数 & $f(x)=\dfrac{\Gamma\!\left(\frac{n+1}2\right)}{\sqrt{n\pi}\,\Gamma\!\left(\frac n2\right)}\left(1+\dfrac{x^2}n\right)^{-\frac{n+1}2}$ \\
 期待値・分散 & $E[X]=0\ (n>1),\quad V[X]=\dfrac{n}{n-2}\ (n>2)$ \\
 累積分布関数 & $F(x)=1-\dfrac12 I_{\frac{n}{n+x^2}}\!\left(\dfrac n2,\dfrac12\right)\ (x\ge0)$，$x<0$では $F(x)=1-F(-x)$ \\
@@ -718,6 +734,7 @@ $T\sim t(n)$のとき $T^2\sim F(1,n)$。$X_1\sim\chi^2(n_1,\lambda),X_2\sim\chi
 特性関数 & 初等関数では表せない（第2種変形ベッセル関数を要する） \\
 \midrule
 \multicolumn{2}{@{}l}{\textbf{$F$分布 $F(n_1,n_2)$}} \\
+使う場面 & 2つの不偏分散の比 $s_1^2/s_2^2$ の分布で，等分散性の検定に用いる。分散分析では級間平均平方と級内平均平方の比として，重回帰分析ではモデル全体の有意性の検定や，変数群を追加する価値をみる部分$F$検定として現れる。 \\
 確率密度関数 & $f(x)=\dfrac{(n_1/n_2)^{n_1/2}}{B\!\left(\frac{n_1}2,\frac{n_2}2\right)}\,\dfrac{x^{n_1/2-1}}{\left(1+\frac{n_1}{n_2}x\right)^{(n_1+n_2)/2}}\ (x>0)$ \\
 期待値・分散 & $E[X]=\dfrac{n_2}{n_2-2}\ (n_2>2),\quad V[X]=\dfrac{2n_2^2(n_1+n_2-2)}{n_1(n_2-2)^2(n_2-4)}\ (n_2>4)$ \\
 累積分布関数 & $F(x)=I_{\frac{n_1x}{n_1x+n_2}}\!\left(\dfrac{n_1}2,\dfrac{n_2}2\right)\ (x\ge0)$ \\
